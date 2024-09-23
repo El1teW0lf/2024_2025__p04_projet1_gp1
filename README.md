@@ -7,7 +7,7 @@
 ![image](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.giphy.com%2Fmedia%2FRo2MgOxH9iaVG%2Fgiphy.gif&f=1&nofb=1&ipt=30eea9df77f9a50fb79231dd2277be5e6e88ba7af9628a6e5785cbffb38da713&ipo=images)
 ![image](https://github.com/user-attachments/assets/db9558ba-bf12-4dee-aecf-2d574ed04b51)
 
-# Telegram en bio
+
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$

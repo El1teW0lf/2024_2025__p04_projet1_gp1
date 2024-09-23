@@ -11,4 +11,6 @@ $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
 
+$$
 {\displaystyle \rho {\frac {\mathrm {D} \mathbf {u} }{\mathrm {D} t}}=-\nabla p+\nabla \cdot {\boldsymbol {\tau }}+\rho \,\mathbf {a} }
+$$

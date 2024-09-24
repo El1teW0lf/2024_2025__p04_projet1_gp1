@@ -1,6 +1,7 @@
 # Projet de NSI n°1:
 
-#### Le plus mieux des projets
+![Static Badge](https://img.shields.io/badge/Groupe_1-Projet_1-blue)
+![Static Badge](https://img.shields.io/badge/Language-Python-green)
 
 *Célestin* (GoldyRat), *Mateo* (El1teW0lf), *Victor* (Herasium) et *Benjamin* (Ben-cpu-gpu) en classe de 1ere 4 au Lycée Notre-Dame de Boulogne, cours de Mr Pioche.
 

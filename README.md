@@ -15,3 +15,5 @@ $$
 $$
 {\displaystyle \rho {\frac {\mathrm {D} \mathbf {u} }{\mathrm {D} t}}=-\nabla p+\nabla \cdot {\boldsymbol {\tau }}+\rho \,\mathbf {a} }
 $$
+![image](https://github.com/user-attachments/assets/f7061f46-f8d4-4955-abc0-296248a517aa)
+

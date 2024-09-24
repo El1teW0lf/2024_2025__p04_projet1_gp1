@@ -3,8 +3,6 @@
 ![Static Badge](https://img.shields.io/badge/Groupe_1-Projet_1-blue)
 ![Static Badge](https://img.shields.io/badge/Langage-Python-green?style=flat&logo=python&logoColor=green)
 
-
-
 *Célestin* (GoldyRat), *Mateo* (El1teW0lf), *Victor* (Herasium) et *Benjamin* (Ben-cpu-gpu) en classe de 1ere 4 au Lycée Notre-Dame de Boulogne, cours de Mr Pioche.
 
 ![image](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.giphy.com%2Fmedia%2FRo2MgOxH9iaVG%2Fgiphy.gif&f=1&nofb=1&ipt=30eea9df77f9a50fb79231dd2277be5e6e88ba7af9628a6e5785cbffb38da713&ipo=images)

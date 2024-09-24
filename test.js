@@ -1,6 +1,0 @@
-/* This is a comment in CSS */
-
-body {
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
-}

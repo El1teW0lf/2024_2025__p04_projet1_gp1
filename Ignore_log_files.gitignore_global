@@ -1,0 +1,8 @@
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+
+# Ignore build folders
+build/

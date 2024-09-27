@@ -1,4 +1,4 @@
-# Projet de NSI n°1:
+# Projet de NSI n°1: Convertiseur de Base:
 
 ![Static Badge](https://img.shields.io/badge/Groupe_1-Projet_1-blue)
 ![Static Badge](https://img.shields.io/badge/Langage-Python-green?style=flat&logo=python&logoColor=green)

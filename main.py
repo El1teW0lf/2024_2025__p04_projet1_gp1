@@ -1,5 +1,24 @@
 def converter(init_number, init_base, target_base):
-   
+    bases = ["bin", "dec", "hex"]
+    hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+    if not init_base in bases:
+        return "Please enter a valid init base"
+    if not target_base in bases:
+        return "Please enter a valid target base"
+    
+    for c in init_number:
+        if init_base == "hex" and not c in hex_map:
+            return "This is not an hexadecimal number"
+        elif not is_number(c):
+            if init_base == "dec":
+                return "This is not a decimal number"
+            elif init_base == "bin":
+                return "This is not a binary number"
+        elif init_base == "bin" and int(c) > 1:
+            return "This is not a binary number"
+
+        
+    # Errors handled, we can start the convertion
     if init_base == target_base:
         return init_number
 
@@ -18,6 +37,14 @@ def converter(init_number, init_base, target_base):
     
     return str(init_number)
 
+def is_number(c):
+    is_int = False
+    try:
+        value = int(c)
+        is_int = True
+    except:
+        pass
+    return is_int
 
 def hex_to_dec(init_number):
     target_number = ""

@@ -1,3 +1,6 @@
+# Main convertions functions : @GoldyRat
+# Error handler : @GoldyRat et @Herasium
+
 from logger import LOG
 from data import DATA
 
@@ -110,7 +113,7 @@ def bin_to_dec(init_number):
     for n in init_number:
         n = int(n)
         target_number += n * 2**a
-        a-=1
+        a-=1 
     
     return target_number
 

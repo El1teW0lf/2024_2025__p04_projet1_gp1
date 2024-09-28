@@ -42,6 +42,9 @@ def converter(init_number, init_base, target_base):
     if init_base == target_base:
         return init_number
 
+    if init_number == '0': 
+        return init_number # 0 is 0 no matter the base
+    
     # Converting the number to decimal if not already done
     if init_base == "bin":
         target_number = bin_to_dec(init_number)
@@ -125,4 +128,4 @@ def bin_to_dec(init_number):
 
 
 
-print(converter("-1","bin","hex"))
+print(converter("0","bin","hex"))

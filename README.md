@@ -1,6 +1,6 @@
 ![LOGO](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)
 
-# Projet de NSI n°1: Convertiseur de Base:
+# Projet de NSI n°1: Convertiseur de Base: BCONVERT
 
 ![Static Badge](https://img.shields.io/badge/Groupe_1-Projet_1-blue?style=flat-square)
 ![Static Badge](https://img.shields.io/badge/Langage-Python-green?logo=python&logoColor=green&style=flat-square)

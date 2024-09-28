@@ -129,7 +129,7 @@ def generate_gradient(color1: str, color2: str, steps: int):
     
     gradient = []
     
-    for step in range(steps):
+    for step in range(steps): #Pour faire simple cette boucle fait la moyenne entre deux couleurs pour en deduire un degrade genre 0 - 10 puis 0 - 5 - 10 puis 0 - 2.5 - 5 - 7.5 - 10
         interpolated_color = (
             int(color1_rgb[0] + (color2_rgb[0] - color1_rgb[0]) * step / (steps - 1)),
             int(color1_rgb[1] + (color2_rgb[1] - color1_rgb[1]) * step / (steps - 1)),
@@ -186,4 +186,3 @@ def main():
     clear()
     get_menu_text(number=number,base=base)
 
-main()

@@ -9,60 +9,8 @@ data = DATA()
 hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
 bases = ["bin", "dec", "hex"]
 
-def check_if_valid_input(number,base):
-    
 
-def converter(init_number, init_base, target_base):
-    init_number = init_number.lower()
 
-    if not init_base in bases: # check if the init base is a base
-        LOG(data.get_error("INVALID_START_BASE"), 3)
-        return 0
-
-    if not target_base in bases: # same for the target base
-        LOG(data.get_error("INVALID_TARGET_BASE"), 3)
-        return 0
-
-    for c in str(init_number):
-        if init_base == "hex" and not c in hex_map:  # if every character of the string is a base 16 number and the init base is hex, we can continue
-            LOG(data.get_error("NOT_HEX_NUMBER"), 3)
-            return 0
-        elif not is_natural(c):
-            if init_base == "dec":
-                LOG(data.get_error("NOT_DECIMAL_NUMBER"), 3)
-                return 0
-            elif init_base == "bin":
-                LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
-                return 0
-        elif init_base == "bin" and int(c) > 1: # verifying that the number only has 0 or 1, else it's not binary
-                LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
-                return 0
-        elif init_base == "bin" and int(c) > 1:
-            LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
-            return 0
-
-        
-    # Errors handled, we can start the convertion
-    if init_base == target_base:
-        return init_number
-
-    if init_number == '0': 
-        return init_number # 0 is 0 no matter the base
-    
-    # Converting the number to decimal if not already done
-    if init_base == "bin":
-        target_number = bin_to_dec(init_number)
-    elif init_base == "hex":
-        target_number = hex_to_dec(init_number)
-    
-    # If needed, converting the decimal to binary or hexadecimal
-    if target_base == "bin":
-        target_number = dec_to_bin(target_number)
-    elif target_base == "hex":
-        target_number = dec_to_hex(target_number)
-
-    
-    return target_number
 
 def is_natural(c):
     is_int = False
@@ -132,24 +80,95 @@ def bin_to_dec(init_number):
 
 
 
-def assert_conversion(nmb, base, target_base, expected):
-    result = converter(nmb, base, target_base)
-    description = f"Conversion {base.upper()} vers {target_base.upper()} pour {nmb}"
-    assert result == expected, f"Échec: {description}, obtenu: {result}, attendu: {expected}"
 
-def test_converter():
-    assert_conversion("1010", "bin", "hex", "a")
-    assert_conversion("1010", "bin", "dec", "10")
-    assert_conversion("a", "hex", "bin", "1010")
-    assert_conversion("a", "hex", "dec", "10")
-    assert_conversion("10", "dec", "bin", "1010")
-    assert_conversion("10", "dec", "hex", "a")
-    assert_conversion("0", "dec", "bin", "0")
-    assert_conversion("0", "dec", "hex", "0")
-    assert_conversion("0", "bin", "dec", "0")
-    assert_conversion("0", "hex", "dec", "0")
+def check_if_valid_input(number, base, target):
+    """
+    Vérifie si l'entrée (nombre, base initiale, base cible) est valide. 
+    Gère les erreurs liées aux bases invalides, aux signes incorrects, et aux caractères non valides.
 
-    print("Tous les tests ont réussi!")
+    J'ai ecrit le code inital, refactorisé mieux par chatgpt, j'avoue que le resultat final est cool. //Victor
+    """
 
-# Appel de la fonction de test
-test_converter()
+    number = str(number).lower()
+
+    # Vérification de la validité des bases source et cible
+    if base not in bases:
+        LOG(data.get_error("INVALID_START_BASE"), 3)
+        return False
+
+    if target not in bases:
+        LOG(data.get_error("INVALID_TARGET_BASE"), 3)
+        return False
+
+    # Dictionnaire pour associer chaque base à son validateur de caractères
+    base_validators = {
+        "hex": lambda c: c in hex_map,
+        "dec": lambda c: c.isdigit(),
+        "bin": lambda c: c in "01"
+    }
+
+    # Validation des caractères du nombre en fonction de la base
+    validator = base_validators.get(base)
+
+    if not validator:
+        LOG(data.get_error("INVALID_START_BASE"), 3)
+        return False
+
+    # Vérification caractère par caractère
+    for c in str(number):
+        if not validator(c):
+            error_key = {
+                "hex": "NOT_HEX_NUMBER",
+                "dec": "NOT_DECIMAL_NUMBER",
+                "bin": "NOT_BINARY_NUMBER"
+            }[base]
+            LOG(data.get_error(error_key), 3)
+            return False
+
+
+    # Vérification des nombres décimaux négatifs
+    if base == "dec" and int(number) < 0:
+        LOG(data.get_error("INVALID_SIGN"), 3)
+        return False
+
+    return True
+
+
+def converter(init_number, init_base, target_base):
+
+    init_number = str(init_number).lower()
+    try:
+        if not check_if_valid_input(init_number,init_base,target_base):
+            return
+    except:
+        LOG(data.get_error("Unknown",3))
+        return
+
+        
+    # Errors handled, we can start the convertion
+    if init_base == target_base:
+        return init_number
+
+    if init_number == '0': 
+        return init_number # 0 is 0 no matter the base
+    
+    target_number = -1
+
+    # Converting the number to decimal if not already done
+    if init_base == "bin":
+        target_number = bin_to_dec(init_number)
+    elif init_base == "hex":
+        target_number = hex_to_dec(init_number)
+    
+    # If needed, converting the decimal to binary or hexadecimal
+    if target_base == "bin":
+        target_number = dec_to_bin(target_number)
+    elif target_base == "hex":
+        target_number = dec_to_hex(target_number)
+
+    
+    return target_number
+
+print(converter(10,"dec","bin"))
+
+

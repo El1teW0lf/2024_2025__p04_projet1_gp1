@@ -7,7 +7,8 @@ class DATA:
             "NOT_HEX_NUMBER": "This is not a hexadecimal number",
             "NOT_DECIMAL_NUMBER": "This is not a decimal number",
             "NOT_BINARY_NUMBER": "This is not a binary number",
-            "NON_NUMERIC_CHARACTER": "This contains non-numeric characters"
+            "NON_NUMERIC_CHARACTER": "This contains non-numeric characters",
+            "INVALID_SIGN": "The number should be >= 0"
         }
 
     def get_error(self, error_key):

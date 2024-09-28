@@ -66,6 +66,7 @@ def dec_to_bin(init_number):
     target_number = target_number[::-1] # Reversing the loop to get the final number
     return target_number
 
+
 def bin_to_dec(init_number):
 
     target_number = 0
@@ -152,7 +153,7 @@ def converter(init_number, init_base, target_base):
     if init_number == '0': 
         return init_number # 0 is 0 no matter the base
     
-    target_number = -1
+    target_number = init_number
 
     # Converting the number to decimal if not already done
     if init_base == "bin":
@@ -169,6 +170,6 @@ def converter(init_number, init_base, target_base):
     
     return init_number
 
-print(converter("10","dec","bin"))
+print(converter(10,"dec","bin"))
 
 

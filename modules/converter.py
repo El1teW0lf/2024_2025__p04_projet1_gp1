@@ -77,7 +77,7 @@ def bin_to_dec(init_number):
         target_number += n * 2**a
         a-=1 
     
-    return target_number
+    return str(target_number)
 
 
 
@@ -157,17 +157,19 @@ def converter(init_number, init_base, target_base):
 
     # Converting the number to decimal if not already done
     if init_base == "bin":
-        target_number = bin_to_dec(init_number)
+        init_number = bin_to_dec(init_number)
     elif init_base == "hex":
-        target_number = hex_to_dec(init_number)
+        init_number = hex_to_dec(init_number)
     
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
-        target_number = dec_to_bin(target_number)
+        return dec_to_bin(init_number)
     elif target_base == "hex":
-        target_number = dec_to_hex(target_number)
+        return dec_to_hex(init_number)
 
     
-    return target_number
+    return init_number
+
+print(converter(10,"dec","bin"))
 
 

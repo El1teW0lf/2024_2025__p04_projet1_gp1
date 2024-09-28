@@ -11,6 +11,8 @@ def converter(init_number, init_base, target_base):
     bases = ["bin", "dec", "hex"]
     hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]# Every hexadecimal characters
 
+    init_number = init_number.lower()
+
     if not init_base in bases: # check if the init base is a base
         LOG(data.get_error("INVALID_START_BASE"), 3)
         return 0
@@ -122,4 +124,24 @@ def bin_to_dec(init_number):
 
 
 
-print(converter("a10","dec","hex"))
+def assert_conversion(nmb, base, target_base, expected):
+    result = converter(nmb, base, target_base)
+    description = f"Conversion {base.upper()} vers {target_base.upper()} pour {nmb}"
+    assert result == expected, f"Échec: {description}, obtenu: {result}, attendu: {expected}"
+
+def test_converter():
+    assert_conversion("1010", "bin", "hex", "a")
+    assert_conversion("1010", "bin", "dec", "10")
+    assert_conversion("a", "hex", "bin", "1010")
+    assert_conversion("a", "hex", "dec", "10")
+    assert_conversion("10", "dec", "bin", "1010")
+    assert_conversion("10", "dec", "hex", "a")
+    assert_conversion("0", "dec", "bin", "0")
+    assert_conversion("0", "dec", "hex", "0")
+    assert_conversion("0", "bin", "dec", "0")
+    assert_conversion("0", "hex", "dec", "0")
+
+    print("Tous les tests ont réussi!")
+
+# Appel de la fonction de test
+test_converter()

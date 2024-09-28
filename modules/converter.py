@@ -125,4 +125,3 @@ def bin_to_dec(init_number):
 
 
 
-print(converter("-1","bin","hex"))

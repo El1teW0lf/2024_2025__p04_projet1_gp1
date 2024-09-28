@@ -2,6 +2,7 @@
 
 # Projet de NSI n°1: Convertiseur de Base: BCONVERT
 
+![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
 ![Static Badge](https://img.shields.io/badge/Groupe_1-Projet_1-blue?style=flat-square)
 ![Static Badge](https://img.shields.io/badge/Langage-Python-green?logo=python&logoColor=green&style=flat-square)
 

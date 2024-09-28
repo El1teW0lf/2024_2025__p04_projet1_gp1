@@ -1,21 +1,41 @@
+# Main convertions functions : @GoldyRat
+# Error handler : @GoldyRat et @Herasium
+
+from logger import LOG
+from data import DATA
+
+data = DATA()
+
+
 def converter(init_number, init_base, target_base):
     bases = ["bin", "dec", "hex"]
-    hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"] # Every hexadecimal characters
+    hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]# Every hexadecimal characters
+
     if not init_base in bases: # check if the init base is a base
-        return "Please enter a valid init base"
+        LOG(data.get_error("INVALID_START_BASE"), 3)
+        return 0
+
     if not target_base in bases: # same for the target base
-        return "Please enter a valid target base"
-    
-    for c in init_number:
-        if init_base == "hex" and not c in hex_map: # if every character of the string is a base 16 number and the init base is hex, we can continue
-            return "This is not an hexadecimal number"
+        LOG(data.get_error("INVALID_TARGET_BASE"), 3)
+        return 0
+
+    for c in str(init_number):
+        if init_base == "hex" and not c in hex_map:  # if every character of the string is a base 16 number and the init base is hex, we can continue
+            LOG(data.get_error("NOT_HEX_NUMBER"), 3)
+            return 0
         elif not is_number(c): # checking if every character of the string is a number, else the program won't work
             if init_base == "dec":
-                return "This is not a decimal number"
+                LOG(data.get_error("NOT_DECIMAL_NUMBER"), 3)
+                return 0
             elif init_base == "bin":
-                return "This is not a binary number"
+                LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
+                return 0
         elif init_base == "bin" and int(c) > 1: # verifying that the number only has 0 or 1, else it's not binary
-            return "This is not a binary number"
+                LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
+                return 0
+        elif init_base == "bin" and int(c) > 1:
+            LOG(data.get_error("NOT_BINARY_NUMBER"), 3)
+            return 0
 
         
     # Errors handled, we can start the convertion
@@ -95,10 +115,11 @@ def bin_to_dec(init_number):
     
     for n in init_number:
         n = int(n)
-        target_number += n * 2**a # Writing the binary number as a sum of numbers multiplied by the highest possible power of 2
-        a-=1 # Reducing the power as we continue the loop
+        target_number += n * 2**a
+        a-=1 
     
     return target_number
 
 
 
+print(converter("a10","dec","hex"))

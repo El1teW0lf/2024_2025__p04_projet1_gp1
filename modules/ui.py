@@ -15,6 +15,7 @@ logo = """
 color_1 = "ff99c8"
 color_2 = "e4c1f9"
 
+colored = True
 
 
 #Permet de 'clear' le terminal, de tout suprimer
@@ -85,8 +86,10 @@ def center_text_height(text: str):
 
 #Permet de colorer le text et de le centrer sans que les characters ANSI fasse n'importe quoi en gros
 def center_and_gradient(text:str):
-    return center_text_width_from_other(apply_color_gradient(text, generate_gradient(color1=color_1,color2=color_2,steps=5)),text)
-
+    if colored:
+        return center_text_width_from_other(apply_color_gradient(text, generate_gradient(color1=color_1,color2=color_2,steps=5)),text)
+    else:
+         return center_text_width_from_other(text,text)
 # Permet de recupere le texte pour le rendu du menu principal, sans l'afficher, juste le texte.
 def get_menu_text(number:str = "",base:int = 0):
 

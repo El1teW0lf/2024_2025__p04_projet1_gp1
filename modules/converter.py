@@ -7,10 +7,12 @@ from data import DATA
 data = DATA()
 
 hex_map = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-def converter(init_number, init_base, target_base):
-    bases = ["bin", "dec", "hex"]
+bases = ["bin", "dec", "hex"]
+
+def check_if_valid_input(number,base):
     
 
+def converter(init_number, init_base, target_base):
     init_number = init_number.lower()
 
     if not init_base in bases: # check if the init base is a base

@@ -109,6 +109,10 @@ Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et
    Tests.py :
 </h1>
 
+<h1 align="center"> 
+   Logger.py :
+</h1>
+
 #### Fonction de journalisation avancée
 1. **Imports et initialisation** :
    - Le module `time` est utilisé pour récupérer et formater l'heure actuelle.

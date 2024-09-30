@@ -35,7 +35,7 @@
 
 <h1> align="center"> 
   ### ```converter.py``` :
-<h1>
+</h1>
 #### Fonctions de conversion
 
 1. **`is_natural(c)`** : Vérifie si un caractère `c` est un nombre naturel (entier non négatif).

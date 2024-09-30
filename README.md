@@ -171,3 +171,40 @@ Des exemples de tests sont proposés pour montrer comment la fonction `LOG` fonc
 <h1 align="center"> 
    Data.py :
 </h1>
+
+Voici un résumé de votre classe `DATA` :
+
+#### Classe `DATA`
+
+La classe `DATA` sert à centraliser la gestion des données et des messages d'erreur pour un système de conversion de bases numériques. Elle contient plusieurs dictionnaires pour organiser les informations nécessaires.
+
+#### 1. **Attributs de la classe**
+
+- **`errors`** : Dictionnaire contenant des messages d'erreur associés à des clés spécifiques.
+  - Exemples de clés : 
+    - `"INVALID_START_BASE"` : Message pour une base d'initialisation invalide.
+    - `"NOT_HEX_NUMBER"` : Message pour un nombre hexadécimal invalide.
+
+- **`convert`** : Dictionnaire pour la gestion des conversions.
+  - **`HEXA_MAP`** : Liste des caractères hexadécimaux de `0` à `f`.
+  - **`BASES`** : Liste des bases disponibles : binaire (`bin`), décimal (`dec`), et hexadécimal (`hex`).
+
+- **`ui`** : Dictionnaire contenant des informations pour l'interface utilisateur.
+  - **`LOGO`** : Une chaîne ASCII représentant le logo.
+  - **`COLOR_1` et `COLOR_2`** : Codes hexadécimaux pour des couleurs spécifiques.
+  - **`COLORS`** : Liste de couleurs supplémentaires.
+  - **`RANDOM_COLORS`** : Booléen indiquant si des couleurs aléatoires doivent être utilisées.
+  - **`COLORED`** : Booléen pour activer/désactiver la coloration.
+  - **`GRAD_STEP`** : Nombre de pas pour la génération de dégradés de couleur.
+
+- **`test`** : Dictionnaire définissant des constantes pour les bases utilisées dans les tests.
+
+#### 2. **Méthode `get_error`**
+
+- **`get_error(self, error_key)`** :
+  - Prend une clé d'erreur en entrée et retourne le message d'erreur correspondant depuis le dictionnaire `errors`.
+  - Si la clé n'existe pas, elle retourne "Unknown error".
+
+#### Utilisation
+
+La classe `DATA` est conçue pour fournir une structure claire et accessible pour gérer les erreurs, les conversions et les paramètres d'interface utilisateur dans le cadre d'une application de conversion de bases. Cela permet de centraliser les messages et les constantes, facilitant ainsi la maintenance et l'évolution du code.

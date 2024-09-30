@@ -9,7 +9,7 @@
 
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
 #  BCONVERT :
-* Ce programme vous permet de convertir vos nombres en : *
+### Ce programme vous permet de convertir vos nombres en :
 * Decimal
 * Binaire
 * Hexadecimal

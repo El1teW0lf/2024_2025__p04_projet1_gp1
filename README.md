@@ -9,10 +9,10 @@
 
 # 👨‍💼 • Membres :
 ### Classe de 1ere 4, Cours de Mr Pioche
-* #### Célestin (GoldyRat)
-* #### Mateo (El1teW0lf)
-* #### Victor (Herasium)
-* #### Benjamin (Ben-cpu-gpu)
+* #### Célestin → GoldyRat
+* #### Mateo → El1teW0lf
+* #### Victor → Herasium
+* #### Benjamin → Ben-cpu-gpu
 
 
 # 🧮 • BCONVERT :

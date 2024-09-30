@@ -4,8 +4,10 @@
   Projet de NSI n°1: Convertiseur de Base: BCONVERT
 </h1>
 
-![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
-![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)
+<h1 align="center">
+<img src="http://ForTheBadge.com/images/badges/built-with-swag.svg">
+<img src="https://forthebadge.com/images/badges/made-with-python.svg">
+</h1>
 
 *Célestin* (GoldyRat), *Mateo* (El1teW0lf), *Victor* (Herasium) et *Benjamin* (Ben-cpu-gpu) en classe de 1ere 4, cours de Mr Pioche.
 

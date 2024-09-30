@@ -32,6 +32,10 @@ class DATA:
             "BASES": ["bin", "dec", "hex"],
         }
 
+        self.log = {
+            "PREFIX": ["DEBUG", "TEST", "INFO", "\033[31;1;5m☢️ERROR☢️\033[0m"]
+        }
+        
         self.ui = {
             "LOGO": """╔╗ ╔═╗╔═╗╔╗╔╦  ╦╔═╗╦═╗╔╦╗
 ╠╩╗║  ║ ║║║║╚╗╔╝║╣ ╠╦╝ ║ 

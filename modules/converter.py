@@ -140,8 +140,8 @@ def converter(init_number, init_base, target_base):
     valid, mess = check_if_valid_input(init_number, init_base, target_base)
    
     try:
-        if not valid:
-            return False, mess
+        if not check_if_valid_input(init_number, init_base, target_base):
+            return
     except:
         LOG(data.get_error("Unknown", 3))
         return

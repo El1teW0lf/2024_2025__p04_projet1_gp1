@@ -1,5 +1,5 @@
 <h1 align="center>
-  ![LOGO](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)
+  < img src="[URL source](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)" >
 </h1>
 
 <h1 align="center">

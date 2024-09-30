@@ -101,7 +101,7 @@ def center_and_gradient(text: str):
 
 
 # Permet de recupere le texte pour le rendu du menu principal, sans l'afficher, juste le texte.
-def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str = ""):
+def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str = "", error: str=""):
     menu_text = ""
 
     menu_text += center_and_gradient(logo)
@@ -125,6 +125,10 @@ def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str 
     if result != "":
         menu_text += line_skip(1)
         menu_text += center_and_gradient("=> Résultat: "+result)
+    
+    if  error != None:
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient("=> Erreur: "+error)
 
     menu_text = center_text_height(menu_text)
 
@@ -204,7 +208,7 @@ def apply_color_gradient(text: str, gradient: list):
     return final_text
 
 
-def main(error= None,result = None,number=None,base=None,target=None):
+def main(error = None,result = None,number=None,base=None,target=None):
     if result == None:
         clear()
         get_menu_text()
@@ -215,10 +219,13 @@ def main(error= None,result = None,number=None,base=None,target=None):
         clear()
         get_menu_text(number=number, base=base)
         target = int(getpass(""))
-        clear()
-        get_menu_text(number=number, base=base, target=target)
-
+        print(error)
+        if error != "":
+            get_menu_text(number=number, base=base, target=target, error=error)
+        else:
+            get_menu_text(number=number, base=base, target=target)
+        
         return number,base,target
     else:
         clear()
-        get_menu_text(number=number, base=base, target=target, result=result)
+        get_menu_text(number=number, base=base, target=target, result=result, error=error)

@@ -47,14 +47,56 @@
 
 5. **`bin_to_dec(init_number)`** : Convertit un nombre binaire en décimal.
 
-### Validation d'entrée
+#### Validation d'entrée
 
 6. **`check_if_valid_input(number, base, target)`** : Vérifie la validité de l'entrée (nombre, base d'origine, base cible) en s'assurant que les bases sont valides, que le nombre contient des caractères appropriés, et qu'il ne s'agit pas de valeurs incorrectes (comme des décimaux négatifs).
 
-### Conversion générale
+#### Conversion générale
 
 7. **`converter(init_number, init_base, target_base)`** : Fonction principale qui utilise les autres fonctions pour effectuer la conversion entre différentes bases (binaire, décimal, hexadécimal). Elle commence par vérifier la validité de l'entrée et effectue les conversions nécessaires.
 
-### Logique de gestion des erreurs
+#### Logique de gestion des erreurs
 
-Le code inclut des journaux d'erreurs pour gérer des entrées invalides et améliorer la robustesse du programme.
+Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et améliorer la robustesse du programme.
+
+### ```ui.py``` :
+
+#### Fonctions d'affichage et de mise en forme
+
+1. **`clear()`** : Efface le terminal.
+
+2. **`get_text_bounding_box(text: str)`** : Renvoie la largeur et la hauteur d'un texte donné.
+
+3. **`get_terminal_size()`** : Retourne la taille actuelle du terminal (en colonnes et lignes).
+
+4. **`add_blank_to_text(text: str, number: int)`** : Ajoute un certain nombre d'espaces devant un texte.
+
+5. **`center_text_width(text: str, half: int)`** : Centre un texte horizontalement dans le terminal.
+
+6. **`center_text_width_from_other(text: str, cleared: str = None)`** : Centre un texte horizontalement en utilisant un autre texte comme référence.
+
+7. **`line_skip(number: int)`** : Génère des sauts de ligne formatés.
+
+8. **`center_text_height(text: str)`** : Centre un texte verticalement dans le terminal.
+
+9. **`center_and_gradient(text: str)`** : Centre un texte avec un dégradé de couleur si activé.
+
+10. **`get_menu_text(number: str = "", base: int = 0, target: int = 0)`** : Génère et affiche le texte du menu principal en fonction des entrées fournies.
+
+#### Fonctions de manipulation des couleurs
+
+11. **`hex_to_rgb(hex_color: str)`** : Convertit une couleur hexadécimale en format RGB.
+
+12. **`rgb_to_hex(rgb_color: str)`** : Convertit une couleur RGB en format hexadécimal.
+
+13. **`get_colored_char(char: str, hex_color: str)`** : Applique une couleur à un caractère en utilisant les codes ANSI.
+
+14. **`generate_gradient(color1: str, color2: str, steps: int)`** : Génère un dégradé de couleur entre deux couleurs hexadécimales.
+
+15. **`divide_string(s: str, n: int)`** : Divise une chaîne en une liste de sous-chaînes de longueur similaire.
+
+16. **`apply_color_gradient(text: str, gradient: list)`** : Applique un dégradé de couleur à un texte (supporte le multiligne).
+
+#### Fonction principale
+
+17. **`main()`** : Fonction principale qui gère le flux du programme, efface l'écran et demande à l'utilisateur de saisir des informations (nombre, base, cible) tout en mettant à jour l'affichage du menu.

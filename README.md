@@ -33,9 +33,9 @@
 
 # ⚙️ Fonctionnement :
 
-<h2 align="center"> 
-   converter.py :
-</h2>
+<h1 align="center"> 
+   Converter.py :
+</h1>
 
 #### Fonctions de conversion
 

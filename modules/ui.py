@@ -101,26 +101,30 @@ def center_and_gradient(text: str):
 
 
 # Permet de recupere le texte pour le rendu du menu principal, sans l'afficher, juste le texte.
-def get_menu_text(number: str = "", base: int = 0, target: int = 0):
+def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str = ""):
     menu_text = ""
 
     menu_text += center_and_gradient(logo)
     menu_text += center_and_gradient("Groupe 1; Projet 1")
     menu_text += line_skip(2)
     if number == "":
-        menu_text += center_and_gradient("=> Nombre Source: " + number)
+        menu_text += center_and_gradient("=> Nombre Source: ")
     else:
         menu_text += center_and_gradient("Nombre Source: " + number)
 
     if base == 0 and number != "":
-        menu_text += center_and_gradient("=> [1: Decimale, 2: Binaire, 3: Hexadecimal] Base de départ: " + str(base))
+        menu_text += center_and_gradient("=> [1: Binaire, 2: Decimale, 3: Hexadecimal] Base de départ: " )
     else:
-        menu_text += center_and_gradient("[1: Decimale, 2: Binaire, 3: Hexadecimal] Base de départ: " + str(base))
+        menu_text += center_and_gradient("[1: Binaire, 2: Decimale, 3: Hexadecimal] Base de départ: " + str(base))
 
-    if base == 0 and number != "" and target == 0:
-        menu_text += center_and_gradient("=> [1: Decimale, 2: Binaire, 3: Hexadecimal] Base d'arrivée: " + str(base))
+    if base != 0 and number != "" and target == 0:
+        menu_text += center_and_gradient("=> [1: Binaire, 2: Decimale, 3: Hexadecimal] Base d'arrivée: " )
     else:
-        menu_text += center_and_gradient("[1: Decimale, 2: Binaire, 3: Hexadecimal] Base de d'arrivée: " + str(base))
+        menu_text += center_and_gradient("[1: Binaire, 2: Decimale, 3: Hexadecimal] Base de d'arrivée: " + str(target))
+
+    if result != "":
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient("=> Résultat: "+result)
 
     menu_text = center_text_height(menu_text)
 
@@ -200,17 +204,21 @@ def apply_color_gradient(text: str, gradient: list):
     return final_text
 
 
-def main():
-    clear()
-    get_menu_text()
-    number = getpass("")
-    clear()
-    get_menu_text(number=number)
-    base = int(getpass(""))
-    clear()
-    get_menu_text(number=number, base=base)
-    target = int(getpass(""))
-    clear()
-    get_menu_text(number=number, base=base, target=target)
+def main(error= None,result = None,number=None,base=None,target=None):
+    if result == None:
+        clear()
+        get_menu_text()
+        number = getpass("")
+        clear()
+        get_menu_text(number=number)
+        base = int(getpass(""))
+        clear()
+        get_menu_text(number=number, base=base)
+        target = int(getpass(""))
+        clear()
+        get_menu_text(number=number, base=base, target=target)
 
-    return number,base,target
+        return number,base,target
+    else:
+        clear()
+        get_menu_text(number=number, base=base, target=target, result=result)

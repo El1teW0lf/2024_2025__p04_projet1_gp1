@@ -7,7 +7,7 @@
   <img src="https://forthebadge.com/images/badges/made-with-python.svg">
 </h1>
 
-# 👨‍💼 Membres :
+# 👨‍💼 • Membres :
 ### Classe de 1ere 4, Cours de Mr Pioche
 * #### Célestin (GoldyRat)
 * #### Mateo (El1teW0lf)
@@ -15,7 +15,7 @@
 * #### Benjamin (Ben-cpu-gpu)
 
 
-# 🧮 BCONVERT :
+# 🧮 • BCONVERT :
 ### Ce programme vous permet de convertir vos nombres en :
 * #### [Decimal](https://fr.wikipedia.org/wiki/Entier_naturel)
 * #### [Binaire](https://fr.wikipedia.org/wiki/Binaire)
@@ -23,7 +23,7 @@
 ### Lancement du programme 💻 >>> ```__main__.py```
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
 
-# 🗂️ Fichiers :
+# 🗂️ • Fichiers :
 
 * #### ```Converter.py ``` >>> Programme principal chargé de la converstion
 * #### ```Ui.py ``` >>> Programme destiné à l'interface de l'utilisateur
@@ -31,7 +31,7 @@
 * #### ```Logger.py ``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
 * #### ```Data.py ``` >>> Programme desitiné à la définition des fonctions tiers
 
-# ⚙️ Fonctionnement :
+# ⚙️ • Fonctionnement :
 
 <h1 align="center"> 
    Converter.py :

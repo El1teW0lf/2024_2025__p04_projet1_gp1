@@ -1,7 +1,7 @@
 ![LOGO](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)
-
-# Projet de NSI n°1: Convertiseur de Base: BCONVERT
-
+<h1 align="center">
+  Projet de NSI n°1: Convertiseur de Base: BCONVERT
+</h1>
 ![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
 ![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)
 

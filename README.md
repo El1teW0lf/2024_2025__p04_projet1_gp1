@@ -10,7 +10,7 @@
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
 # 🧮 BCONVERT :
 ### Ce programme vous permet de convertir vos nombres en :
-* Decimal
+* (Decimal)[https://github.com/Tarik673000/Naoki-Bot-Perso?tab=readme-ov-file]
 * Binaire
 * Hexadecimal
 

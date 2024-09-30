@@ -61,7 +61,9 @@
 
 Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et améliorer la robustesse du programme.
 
-### ```ui.py``` :
+<h1 align="center"> 
+   Ui.py :
+</h1>
 
 #### Fonctions d'affichage et de mise en forme
 

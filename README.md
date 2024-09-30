@@ -1,6 +1,5 @@
 <h1 align="center">
 <img src="https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file">
-</h1>
 Projet de NSI n°1: Convertiseur de Base: BCONVERT
 </h1>
 <h1 align="center">

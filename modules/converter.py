@@ -139,7 +139,7 @@ def converter(init_number, init_base, target_base):
     init_number = str(init_number).lower()
     try:
         if not check_if_valid_input(init_number, init_base, target_base):
-            return
+            return  
     except:
         LOG(data.get_error("Unknown", 3))
         return

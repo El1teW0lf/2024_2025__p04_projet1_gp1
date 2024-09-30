@@ -31,7 +31,7 @@
 * #### ```Logger.py ``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
 * #### ```Data.py ``` >>> Programme desitiné à la définition des fonctions tiers
 
-# ⚙️ • Fonctionnement :
+# [⚙️ • Fonctionnement :](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/fonctionnement.md)
 
 <h1 align="center"> 
    Converter.py :

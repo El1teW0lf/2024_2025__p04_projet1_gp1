@@ -1,6 +1,10 @@
-![LOGO](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)
+<h1 align="center>
+  ![LOGO](https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file)
+</h1>
 
-# Projet de NSI n°1: Convertiseur de Base: BCONVERT
+<h1 align="center">
+  Projet de NSI n°1: Convertiseur de Base: BCONVERT
+</h1>
 
 ![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
 ![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)
@@ -16,10 +20,14 @@
 
 ### Lancement du programme 💻 >>> ```__main__.py```
 
-# ⚙️ Fonctionnement :
+# 🗂️ Fichiers :
 
 * #### ```Converter.py ``` >>> Programme principal chargé de la converstion
-* #### ```ui.py ```>>> Programme destiné à l'interface de l'utilisateur
-* #### ```tests.py ```>>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
-* #### ```logger.py ```>>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
-* #### ```data.py ```>>> Programme desitiné à la définition des fonctions tiers
+* #### ```ui.py ``` >>> Programme destiné à l'interface de l'utilisateur
+* #### ```tests.py ``` >>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
+* #### ```logger.py ``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
+* #### ```data.py ``` >>> Programme desitiné à la définition des fonctions tiers
+
+# ⚙️ Fonctionnement :
+
+### ```Converter.py``` :

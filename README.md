@@ -34,3 +34,27 @@
 # ⚙️ Fonctionnement :
 
 ### ```Converter.py``` :
+
+#### Fonctions de conversion
+
+1. **`is_natural(c)`** : Vérifie si un caractère `c` est un nombre naturel (entier non négatif).
+
+2. **`hex_to_dec(init_number)`** : Convertit un nombre en notation hexadécimale en décimal en utilisant une liste de coefficients hexadécimaux.
+
+3. **`dec_to_hex(init_number)`** : Convertit un nombre décimal en notation hexadécimale.
+
+4. **`dec_to_bin(init_number)`** : Convertit un nombre décimal en notation binaire.
+
+5. **`bin_to_dec(init_number)`** : Convertit un nombre binaire en décimal.
+
+### Validation d'entrée
+
+6. **`check_if_valid_input(number, base, target)`** : Vérifie la validité de l'entrée (nombre, base d'origine, base cible) en s'assurant que les bases sont valides, que le nombre contient des caractères appropriés, et qu'il ne s'agit pas de valeurs incorrectes (comme des décimaux négatifs).
+
+### Conversion générale
+
+7. **`converter(init_number, init_base, target_base)`** : Fonction principale qui utilise les autres fonctions pour effectuer la conversion entre différentes bases (binaire, décimal, hexadécimal). Elle commence par vérifier la validité de l'entrée et effectue les conversions nécessaires.
+
+### Logique de gestion des erreurs
+
+Le code inclut des journaux d'erreurs pour gérer des entrées invalides et améliorer la robustesse du programme.

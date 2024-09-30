@@ -16,10 +16,10 @@ def assert_valid_input(number, source_base, target_base, expected_result, error_
         f"Checking input: {number} from {source_base.upper()} to {target_base.upper()}"
     )
     try:
-        result = check_if_valid_input(number, source_base, target_base)
+        result,message = check_if_valid_input(number, source_base, target_base)
         assert result == expected_result, f"Failed: {description}, got: {result}, expected: {expected_result}"
         LOG(f"{description}: ✅", 1)
-    except AssertionError as e:
+    except Exception as e:
         LOG(f"{description}: ❌ - {e}", 1)
         error_counter[0] += 1  # Increment the error counter
 
@@ -30,10 +30,10 @@ def assert_conversion(number, source_base, target_base, expected_result, error_c
         f"Converting {number} from {source_base.upper()} to {target_base.upper()}"
     )
     try:
-        result = converter(number, source_base, target_base)
+        result,message = converter(number, source_base, target_base)
         assert str(result) == str(expected_result), f"Failed: {description}, got: {result}, expected: {expected_result}"
         LOG(f"{description}: ✅", 1)
-    except AssertionError as e:
+    except Exception as e:
         LOG(f"{description}: ❌ - {e}", 1)
         error_counter[0] += 1  # Increment the error counter
 

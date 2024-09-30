@@ -126,7 +126,7 @@ def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str 
         menu_text += line_skip(1)
         menu_text += center_and_gradient("=> Résultat: "+result)
     
-    if  error != None:
+    if  error != "":
         menu_text += line_skip(1)
         menu_text += center_and_gradient("=> Erreur: "+error)
 
@@ -209,6 +209,13 @@ def apply_color_gradient(text: str, gradient: list):
 
 
 def main(error = None,result = None,number=None,base=None,target=None):
+
+    clear()
+    if error != None:
+        get_menu_text(error=data.errors[error])
+        return
+
+
     if result == None:
         clear()
         get_menu_text()
@@ -219,8 +226,8 @@ def main(error = None,result = None,number=None,base=None,target=None):
         clear()
         get_menu_text(number=number, base=base)
         target = int(getpass(""))
-        print(error)
-        if error != "":
+        print("Error:",error)
+        if error != None:
             get_menu_text(number=number, base=base, target=target, error=error)
         else:
             get_menu_text(number=number, base=base, target=target)
@@ -228,4 +235,7 @@ def main(error = None,result = None,number=None,base=None,target=None):
         return number,base,target
     else:
         clear()
-        get_menu_text(number=number, base=base, target=target, result=result, error=error)
+        if error != None:
+            get_menu_text(number=number, base=base, target=target, error=error)
+        else:
+            get_menu_text(number=number, base=base, target=target, result=result)

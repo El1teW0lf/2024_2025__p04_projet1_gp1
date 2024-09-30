@@ -16,7 +16,8 @@ def is_natural(c):
         value = int(c)
         is_int = True
         if int(c) >= 0:
-            is_int
+            is_int  = True 
+
     except:
         pass
 

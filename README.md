@@ -104,3 +104,28 @@ Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et
 #### Fonction principale
 
 17. **`main()`** : Fonction principale qui gère le flux du programme, efface l'écran et demande à l'utilisateur de saisir des informations (nombre, base, cible) tout en mettant à jour l'affichage du menu.
+
+<h1 align="center"> 
+   Tests.py :
+</h1>
+
+#### Fonction de journalisation avancée
+1. **Imports et initialisation** :
+   - Le module `time` est utilisé pour récupérer et formater l'heure actuelle.
+   - Les données de configuration (comme le préfixe de log) sont chargées à partir de `DATA()`.
+
+2. **Variables** :
+   - `current_time` : Récupère le temps local sous forme de structure de temps.
+   - `formatted_time` : Formate la date et l'heure dans un format lisible (`jj/mm/aaaa hh:mm:ss`).
+   - `lvl` : Définit le niveau de journalisation global (seulement les messages de niveau supérieur seront affichés).
+   - `PREFIX` : Charge les préfixes associés aux niveaux de log.
+
+3. **Fonction `LOG(data: str, level: int)`** :
+   - Cette fonction affiche un message de log formaté avec la date, l'heure et un préfixe basé sur le niveau.
+   - Si le niveau du message est inférieur au niveau global (`lvl`), le message n'est pas affiché.
+
+#### Exemples de tests
+
+Des exemples de tests sont proposés pour montrer comment la fonction `LOG` fonctionne :
+- Les messages de niveau inférieur ou égal à `lvl` ne sont pas affichés.
+- Les messages de niveau supérieur à `lvl` sont affichés.

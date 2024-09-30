@@ -133,7 +133,7 @@ def check_if_valid_input(number, base, target):
 
     return True
 
-
+#J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
 def converter(init_number, init_base, target_base):
     init_number = str(init_number).lower()
     try:

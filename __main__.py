@@ -1,6 +1,10 @@
 import sys
 import modules.ui as ui
 import modules.tests as tests
+import modules.converter as converter
+import modules.data as Data
+
+data = Data.DATA()
 
 #Detect le type de launch, si c'est ui, cmd simple ou module import
 def detect_launch_type():
@@ -23,6 +27,8 @@ if __name__ == "__main__":
     launch = detect_launch_type()
     if launch == 0:
         number, base, target = ui.main()
-        
+        result = converter.converter(number,data.convert["BASES"][base-1],data.convert["BASES"][target-1])
+        ui.main(result=result,number=number,base=base,target=target)
+
     elif launch == 3:
         tests.run_tests()

@@ -109,6 +109,40 @@ Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et
    Tests.py :
 </h1>
 
+#### Importations et initialisation
+
+- Le code importe des fonctions de conversion et de validation depuis les modules appropriés, ainsi que le module de journalisation.
+- Il initialise des constantes pour les bases binaires, décimales et hexadécimales.
+
+#### Fonctions de vérification et d'assertion
+
+1. **`assert_valid_input(number, source_base, target_base, expected_result, error_counter)`** :
+   - Vérifie si un nombre est valide pour les bases données.
+   - Utilise `check_if_valid_input` et compare le résultat avec la valeur attendue.
+   - Journalise le résultat et incrémente un compteur d'erreurs en cas d'échec.
+
+2. **`assert_conversion(number, source_base, target_base, expected_result, error_counter)`** :
+   - Vérifie si le résultat de la conversion d'un nombre entre bases est correct.
+   - Utilise la fonction `converter` et compare le résultat avec la valeur attendue.
+   - Journalise le résultat et incrémente un compteur d'erreurs en cas d'échec.
+
+#### Tests de validation et de conversion
+
+3. **`test_check_if_valid_input()`** :
+   - Contient des cas de test pour valider les entrées en fonction de différentes bases.
+   - Utilise `assert_valid_input` pour tester divers scénarios, y compris des cas de bords et des bases invalides.
+   - Journalise le nombre total d'erreurs.
+
+4. **`test_converter()`** :
+   - Contient des cas de test pour vérifier les conversions entre différentes bases.
+   - Utilise `assert_conversion` pour tester divers scénarios, y compris des conversions de zéro et des cas de bords.
+   - Journalise le nombre total d'erreurs.
+
+#### Fonction de lancement des tests
+
+5. **`run_tests()`** :
+   - Exécute les fonctions de test `test_converter` et `test_check_if_valid_input` pour valider l'ensemble du système de conversion.
+
 <h1 align="center"> 
    Logger.py :
 </h1>
@@ -133,3 +167,7 @@ Ce programme inclut des journaux d'erreurs pour gérer des entrées invalides et
 Des exemples de tests sont proposés pour montrer comment la fonction `LOG` fonctionne :
 - Les messages de niveau inférieur ou égal à `lvl` ne sont pas affichés.
 - Les messages de niveau supérieur à `lvl` sont affichés.
+
+<h1 align="center"> 
+   Data.py :
+</h1>

@@ -18,7 +18,7 @@
 
 # ⚙️ Fonctionnement :
 
-* ####```Converter.py ``` >>> Programme principal chargé de la converstion
+* #### ```Converter.py ``` >>> Programme principal chargé de la converstion
 * ```#### ui.py ```>>> Programme destiné à l'interface de l'utilisateur
 * ```#### tests.py ```>>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
 * ```#### logger.py ```>>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 

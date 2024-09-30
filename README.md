@@ -11,8 +11,8 @@
 # 🧮 BCONVERT :
 ### Ce programme vous permet de convertir vos nombres en :
 * #### [Decimal](https://fr.wikipedia.org/wiki/Entier_naturel)
-* [Binaire](https://fr.wikipedia.org/wiki/Binaire)
-* [Hexadecimal](https://fr.wikipedia.org/wiki/Syst%C3%A8me_hexad%C3%A9cimal)
+* #### [Binaire](https://fr.wikipedia.org/wiki/Binaire)
+* #### [Hexadecimal](https://fr.wikipedia.org/wiki/Syst%C3%A8me_hexad%C3%A9cimal)
 
 ### Lancement du programme 💻 >>> ```__main__.py```
 

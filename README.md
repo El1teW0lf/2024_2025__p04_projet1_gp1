@@ -8,3 +8,8 @@
 *Célestin* (GoldyRat), *Mateo* (El1teW0lf), *Victor* (Herasium) et *Benjamin* (Ben-cpu-gpu) en classe de 1ere 4, cours de Mr Pioche.
 
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
+#  BCONVERT :
+Ce programme vous permet de convertir vos nombres en :
+* Decimal
+* Binaire
+* Hexadecimal

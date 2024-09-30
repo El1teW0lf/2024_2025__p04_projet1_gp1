@@ -22,7 +22,6 @@
 * #### [Hexadecimal](https://fr.wikipedia.org/wiki/Syst%C3%A8me_hexad%C3%A9cimal)
 ### Lancement du programme 💻 >>> ```__main__.py```
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
-![image](https://github.com/user-attachments/assets/92b6333e-f1b8-45f0-8850-663f39555480)
 
 # 🗂️ • Fichiers :
 

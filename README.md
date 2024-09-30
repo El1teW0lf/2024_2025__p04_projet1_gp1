@@ -26,4 +26,4 @@
 
 # ⚙️ Fonctionnement :
 
-## ```converter.py```
+## ```Converter.py``` :

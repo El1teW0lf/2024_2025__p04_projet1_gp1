@@ -172,8 +172,6 @@ Des exemples de tests sont proposés pour montrer comment la fonction `LOG` fonc
    Data.py :
 </h1>
 
-Voici un résumé de votre classe `DATA` :
-
 #### Classe `DATA`
 
 La classe `DATA` sert à centraliser la gestion des données et des messages d'erreur pour un système de conversion de bases numériques. Elle contient plusieurs dictionnaires pour organiser les informations nécessaires.

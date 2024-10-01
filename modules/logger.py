@@ -7,11 +7,18 @@ formatted_time = time.strftime("%d/%m/%Y %H:%M:%S", current_time)  # Formate l'h
 lvl = 1
 PREFIX = DATA().log["PREFIX"]
 
+logfile = "logs.txt"
+
 def LOG (data: str, level: int):
     if level < lvl:
         pass
     else:  
-        print(f"{formatted_time} [{PREFIX[level]}] {data}")
+        log_msg = (f"{formatted_time} [{PREFIX[level]}] {data}")
+        print (log_msg)
+        with open (logfile, "a") as file:
+            file.write (log_msg)
+        print (log_msg.strip())
+
 
 # Proposition par chatgpt du test du logger
 #lvl = 1  # Définit le niveau global à 1 (seulement les messages de niveau > 1 seront affichés)

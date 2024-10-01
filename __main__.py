@@ -44,9 +44,22 @@ if __name__ == "__main__":
     launch = detect_launch_type()
     if launch == 0:
         number, base, target = ui.main()
-        result, mess = converter.converter(number,data.convert["BASES"][base-1],data.convert["BASES"][target-1])
-        print(result,mess)
-        ui.main(result=result,error=mess,number=number,base=base,target=target)
+        result = ""
+        mess = ""
+        if base < 0 or base > 3:
+            LOG(data.get_error("INVALID_START_BASE"), 3)
+            mess = "INVALID_START_BASE"
+        elif target < 0 or target > 3:
+            LOG(data.get_error("INVALID_TARGET_BASE"), 3)
+            mess = "INVALID_TARGET_BASE"
+        # Cette partie là c'est Blackbox AI parce que moi ça marchait pas et lui ça marchait
+        else:
+            try:
+                result, mess = converter.converter(number, data.convert["BASES"][base-1], data.convert["BASES"][target-1])
+            except Exception as e:
+                mess = str(e)
+        print(result, mess)
+        ui.main(result=result, error=mess, number=number, base=base, target=target)
 
     elif launch == 3:
         tests.run_tests()

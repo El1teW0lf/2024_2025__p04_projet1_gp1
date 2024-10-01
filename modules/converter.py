@@ -96,11 +96,11 @@ def check_if_valid_input(number, base, target):
     # Vérification de la validité des bases source et cible
     if base not in bases:
         LOG(data.get_error("INVALID_START_BASE"), 3)
-        return False
+        return False, "INVALID_START_BASE"
 
     if target not in bases:
         LOG(data.get_error("INVALID_TARGET_BASE"), 3)
-        return False
+        return False, "INVALID_TARGET_BASE"
 
     # Dictionnaire pour associer chaque base à son validateur de caractères
     base_validators = {
@@ -114,7 +114,7 @@ def check_if_valid_input(number, base, target):
 
     if not validator:
         LOG(data.get_error("INVALID_START_BASE"), 3)
-        return False
+        return False, "INVALID_START_BASE"
 
     # Vérification caractère par caractère
     for c in str(number):
@@ -125,31 +125,33 @@ def check_if_valid_input(number, base, target):
                 "bin": "NOT_BINARY_NUMBER",
             }[base]
             LOG(data.get_error(error_key), 3)
-            return False
+            return False, error_key
 
     # Vérification des nombres décimaux négatifs
     if base == "dec" and int(number) < 0:
         LOG(data.get_error("INVALID_SIGN"), 3)
-        return False
+        return False, "INVALID_SIGN"
 
-    return True
+    return True,""
 
 #J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
 def converter(init_number, init_base, target_base):
     init_number = str(init_number).lower()
+    valid, mess = check_if_valid_input(init_number, init_base, target_base)
+   
     try:
-        if not check_if_valid_input(init_number, init_base, target_base):
-            return  
+        if not valid:
+            return False, mess
     except:
         LOG(data.get_error("Unknown", 3))
-        return
+        return False,mess
 
     # Errors handled, we can start the convertion
     if init_base == target_base:
-        return init_number
+        return init_number,None
 
     if init_number == "0":
-        return init_number  # 0 is 0 no matter the base
+        return init_number,None
 
     target_number = init_number
 
@@ -161,8 +163,8 @@ def converter(init_number, init_base, target_base):
 
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
-        return dec_to_bin(init_number)
+        return dec_to_bin(init_number),None
     elif target_base == "hex":
-        return dec_to_hex(init_number)
+        return dec_to_hex(init_number),None
 
-    return init_number
+    return str(init_number),None

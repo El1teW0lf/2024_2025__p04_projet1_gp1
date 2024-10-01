@@ -167,4 +167,4 @@ def converter(init_number, init_base, target_base):
     elif target_base == "hex":
         return dec_to_hex(init_number),None
 
-    return init_number,None
+    return str(init_number),None

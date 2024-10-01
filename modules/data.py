@@ -8,6 +8,7 @@ class DATA:
             "NOT_BINARY_NUMBER": "This is not a binary number",
             "NON_NUMERIC_CHARACTER": "This contains non-numeric characters",
             "INVALID_SIGN": "The number should be >= 0",
+            "MISSING_PACKAGES": "You need the keyboard package to run this project. Please run 'pip install .'"
         }
 
         self.convert = {

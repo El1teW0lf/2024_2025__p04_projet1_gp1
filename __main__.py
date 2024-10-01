@@ -3,8 +3,22 @@ import modules.ui as ui
 import modules.tests as tests
 import modules.converter as converter
 import modules.data as Data
+from modules.logger import LOG
+import sys
+import subprocess
+import pkg_resources
+
+#Verifie si le modules "keyboard", nécessaire est disponible
+
+required = {'keyboard'}
+installed = {pkg.key for pkg in pkg_resources.working_set}
+missing = required - installed
 
 data = Data.DATA()
+
+
+
+
 
 #Detect le type de launch, si c'est ui, cmd simple ou module import
 def detect_launch_type():
@@ -24,6 +38,9 @@ def detect_launch_type():
     return launch_type
 
 if __name__ == "__main__":
+
+    assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
+    
     launch = detect_launch_type()
     if launch == 0:
         number, base, target = ui.main()

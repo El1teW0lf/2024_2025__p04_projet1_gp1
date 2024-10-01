@@ -4,6 +4,7 @@ from getpass import getpass
 from modules.logger import LOG
 from modules.data import DATA
 import random
+import keyboard
 
 data = DATA()
 
@@ -20,9 +21,11 @@ colored = data.ui["COLORED"]
 
 
 # Permet de 'clear' le terminal, de tout suprimer
+def back_up():
+    print("\033[H", end="") 
+
 def clear():
     print(chr(27) + "[2J")
-
 
 # Détermine la taille sur l'ecran d'un text donné, avec la taille en ligne et en colone.
 def get_text_bounding_box(text: str):
@@ -42,7 +45,7 @@ def get_terminal_size():
 
 
 def add_blank_to_text(text: str, number: int):
-    return " " * number + text
+    return " " * number + text + " " * number
 
 
 # Centre le texte sur l'axe horizontale en fonction de sa taille et de la taille du terminal, accepte le multiligne
@@ -82,7 +85,7 @@ def center_text_height(text: str):
 
     current_text_size = get_text_bounding_box(text)
     half_size_to_add = math.floor((terminal_size[1] - current_text_size[1]) / 2)
-    text = text + line_skip(half_size_to_add)
+    text = line_skip(half_size_to_add) + text + line_skip(half_size_to_add)
 
     return text
 
@@ -100,39 +103,8 @@ def center_and_gradient(text: str):
         return center_text_width_from_other(text, text)
 
 
-# Permet de recupere le texte pour le rendu du menu principal, sans l'afficher, juste le texte.
-def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str = "", error: str=""):
-    menu_text = ""
 
-    menu_text += center_and_gradient(logo)
-    menu_text += center_and_gradient("Groupe 1; Projet 1")
-    menu_text += line_skip(2)
-    if number == "":
-        menu_text += center_and_gradient("=> Nombre Source: ")
-    else:
-        menu_text += center_and_gradient("Nombre Source: " + number)
 
-    if base == 0 and number != "":
-        menu_text += center_and_gradient("=> [1: Binaire, 2: Decimale, 3: Hexadecimal] Base de départ: " )
-    else:
-        menu_text += center_and_gradient("[1: Binaire, 2: Decimale, 3: Hexadecimal] Base de départ: " + str(base))
-
-    if base != 0 and number != "" and target == 0:
-        menu_text += center_and_gradient("=> [1: Binaire, 2: Decimale, 3: Hexadecimal] Base d'arrivée: " )
-    else:
-        menu_text += center_and_gradient("[1: Binaire, 2: Decimale, 3: Hexadecimal] Base de d'arrivée: " + str(target))
-
-    if result != "":
-        menu_text += line_skip(1)
-        menu_text += center_and_gradient("=> Résultat: "+result)
-    
-    if  error != "":
-        menu_text += line_skip(1)
-        menu_text += center_and_gradient("=> Erreur: "+error)
-
-    menu_text = center_text_height(menu_text)
-
-    print(menu_text)
 
 
 # Je veux dire j'ai meme besoin d'expliquer cette fonction ?
@@ -207,35 +179,94 @@ def apply_color_gradient(text: str, gradient: list):
 
     return final_text
 
+# Permet de recupere le texte pour le rendu du menu principal, sans l'afficher, juste le texte.
+def get_menu_text(number: str = "", base: int = 0, target: int = 0, result: str = "", error: str = ""):
+    menu_text = ""
 
-def main(error = None,result = None,number=None,base=None,target=None):
+    menu_text += center_and_gradient(logo)
+    menu_text += center_and_gradient("Groupe 1; Projet 1")
+    menu_text += line_skip(2)
 
+    # Affichage du nombre source
+    menu_text += center_and_gradient(f"Nombre Source: {number}" if number else "=> Nombre Source: ")
+
+    # Affichage de la base de départ
+    base_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base de départ: "
+    menu_text += center_and_gradient(
+        f"{base_prompt}" + (str(base) if base != 0 else "=> " + base_prompt)
+    )
+
+    # Affichage de la base d'arrivée
+    if base != 0 and number:
+        menu_text += center_and_gradient(
+            f"=> [1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: "
+        )
+    else:
+        menu_text += center_and_gradient(
+            f"[1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: {target}"
+        )
+
+    # Affichage du résultat
+    if result:
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient(f"=> Résultat: {result}")
+
+    # Affichage de l'erreur
+    if error:
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient(f"=> Erreur: {error}")
+
+    # Finalisation et affichage du menu
+    menu_text = center_text_height(menu_text)
+    print(menu_text)
+
+def get_input_live(number=None,base=None,target=None):
+    if number == None:
+        number = ""
+        while True:
+            event = keyboard.read_event() 
+        
+
+
+
+            if event.event_type == keyboard.KEY_DOWN: 
+                key = event.name
+
+                if key == 'enter':
+                    return number,base,target
+                elif key == 'backspace':
+                    number = number[:-1]
+                elif len(key) == 1:  
+                    number += key
+                elif key == 'esc':
+                    assert False, "Exited."
+                back_up()
+                get_menu_text(number=number, base=base, target=target)
+
+
+
+def main(error=None, result=None, number=None, base=None, target=None):
     clear()
-    if error != None:
+
+    if error is not None:
         get_menu_text(error=data.errors[error])
         return
 
+    if result is None:
+        number,target,base = get_input_live(number=number,target=target,base=base)
+        number,target,base = get_input_live(number=number,target=target,base=base)
+        number,target,base = get_input_live(number=number,target=target,base=base)
+        back_up()
+        get_menu_text(number=number, base=base, target=target)
 
-    if result == None:
-        clear()
-        get_menu_text()
-        number = getpass("")
-        clear()
-        get_menu_text(number=number)
-        base = int(getpass(""))
-        clear()
-        get_menu_text(number=number, base=base)
-        target = int(getpass(""))
-        print("Error:",error)
-        if error != None:
-            get_menu_text(number=number, base=base, target=target, error=error)
-        else:
-            get_menu_text(number=number, base=base, target=target)
-        
-        return number,base,target
+        return number, base, target
     else:
-        clear()
-        if error != None:
-            get_menu_text(number=number, base=base, target=target, error=error)
-        else:
-            get_menu_text(number=number, base=base, target=target, result=result)
+        back_up()
+        get_menu_text(number=number, base=base, target=target, result=result)
+
+
+def get_input(prompt, convert_to=str):
+    """Helper function to get user input with optional conversion."""
+
+    user_input = getpass(prompt)
+    return convert_to(user_input)

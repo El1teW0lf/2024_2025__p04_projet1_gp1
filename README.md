@@ -23,7 +23,7 @@
 ### Lancement du programme 💻 >>> ```__main__.py```
 ![Image](https://www.mediafire.com/file_premium/0pqfo96tqq1twgv/image.png/file)
 
-# 🗂️ • Fichiers :
+# 🗂️ • Modules :
 
 * #### ```Converter.py ``` >>> Programme principal chargé de la converstion
 * #### ```Ui.py ``` >>> Programme destiné à l'interface de l'utilisateur

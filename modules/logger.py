@@ -20,7 +20,7 @@ def LOG (data: str, level: int):
         print (log_msg.strip())
 
 
-# Proposition par chatgpt du test du logger
+# Proposition par chatgpt du test du logger dont je me suis inspiré
 #lvl = 1  # Définit le niveau global à 1 (seulement les messages de niveau > 1 seront affichés)
 #log("This is a debug message.", 0)  # Rien ne s'affiche car le niveau est inférieur à lvl
 #log("This is an info message.", 1)   # Rien ne s'affiche car le niveau est égal à lvl

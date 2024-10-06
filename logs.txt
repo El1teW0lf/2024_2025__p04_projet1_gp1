@@ -1,0 +1,6 @@
+05/10/2024 12:32:13 [DEBUG] This is a debug message.
+05/10/2024 12:32:13 [TEST] This is an info message.
+05/10/2024 12:32:13 [INFO] This is a warning message.
+05/10/2024 12:32:13 [DEBUG] This is a debug message.
+05/10/2024 12:32:13 [TEST] This is an info message.
+05/10/2024 12:32:13 [INFO] This is a warning message.

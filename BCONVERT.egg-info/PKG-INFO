@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: BCONVERT
+Version: 0.1.0
+Summary: A project to convert data (NSI project)
+Home-page: https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1
+Author: Groupe 1
+Author-email: 
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+License-File: LICENSE
+Requires-Dist: keyboard

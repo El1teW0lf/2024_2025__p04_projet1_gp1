@@ -46,7 +46,12 @@ class DATA:
             "COLORS": ["ffadad","ffd6a5","fdffb6","caffbf","9bf6ff","a0c4ff","bdb2ff","ffc6ff","fffffc"],
             "RANDOM_COLORS": True,
             "COLORED": True,
-            "GRAD_STEP": 70
+            "GRAD_STEP": 70,
+            "CHAR_MAP": {
+    '&': '1', 'é': '2', '"': '3', "'": '4',
+    '(': '5', '§': '6', 'è': '7', '!': '8',
+    'ç': '9', 'à': '0'
+}
         }
 
 

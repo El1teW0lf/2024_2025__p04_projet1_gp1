@@ -8,7 +8,7 @@ import sys
 import subprocess
 import pkg_resources
 
-#Verifie si le modules "keyboard", nécessaire est disponible
+#Verifie si le modules "pynput", nécessaire est disponible
 
 required = {'keyboard'}
 installed = {pkg.key for pkg in pkg_resources.working_set}
@@ -38,10 +38,13 @@ def detect_launch_type():
     return launch_type
 
 if __name__ == "__main__":
+    
+    LOG("Started BCONVERT",0)
 
     assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
     
     launch = detect_launch_type()
+    LOG(f"Got launch type: {launch}",0)
     if launch == 0:
         number, base, target = ui.main()
         result = ""

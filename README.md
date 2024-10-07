@@ -34,4 +34,4 @@
 # ⚙️ • Fonctionnement :
 
 ### [Clique sur le lien 👈](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/fonctionnement.md)
-@Ben-cpu-gpu
+<@Ben-cpu-gpu>

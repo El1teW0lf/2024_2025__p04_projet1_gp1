@@ -49,6 +49,19 @@ if __name__ == "__main__":
         number, base, target = ui.main()
         result = ""
         mess = ""
+
+        if type(base) != int:
+            LOG(data.get_error("INVALID_START_BASE"), 3)
+            mess = "INVALID_START_BASE"
+
+        base = int(base)
+
+        if type(target) != int:
+            LOG(data.get_error("INVALID_TARGET_BASE"), 3)
+            mess = "INVALID_TARGET_BASE"
+
+        target = int(target)
+
         if base < 0 or base > 3:
             LOG(data.get_error("INVALID_START_BASE"), 3)
             mess = "INVALID_START_BASE"

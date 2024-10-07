@@ -12,13 +12,15 @@ def LOG(data: str, level: int):
 
     log_msg = f"{formatted_time} [{PREFIX[level]}] {data}"
     
+    if level >= lvl:
+        print(log_msg)
+
     try:
         with open(logfile, "a") as file:
-            file.write(log_msg +"\n")
+          #  file.write(log_msg +"\n")
+          pass
     except IOError as e:
         print(f"Error writing to log file: {e}")
 
-    if level >= lvl:
-        print(log_msg)
 
 

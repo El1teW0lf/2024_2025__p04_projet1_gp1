@@ -15,7 +15,8 @@ def is_natural(c):
     try:  # if the convertion of the character to an integer isn't working, then it's not a number
         value = int(c)
         is_int = True
-        if int(c) >= 0:
+        if int(c) >= 0:   # if the number is negative, it's not a natural number
+
             is_int  = True 
 
     except:
@@ -38,9 +39,8 @@ def hex_to_dec(init_number):
 
     for n in v1:
         n = int(n)
-        target_number += (
-            n * 16**a
-        )  # Writing the hexadecimal number as a sum of numbers multiplied by the highest possible power of 16
+        target_number += n * 16**a
+          # Writing the hexadecimal number as a sum of numbers multiplied by the highest possible power of 16
         a -= 1  # Reducing the power as we continue the loop
 
     return target_number
@@ -62,9 +62,7 @@ def dec_to_hex(init_number):
 def dec_to_bin(init_number):
     target_number = ""
     n = int(init_number)
-    while (
-        n > 0
-    ):  # When the result of the euclidian division of the number by 2 reaches 0, we stop the loop
+    while n > 0:  # When the result of the euclidian division of the number by 2 reaches 0, we stop the loop
         target_number += str(n % 2)  # Adding the coefficient to the final number
         n //= 2  # Dividing the number by 2 while keeping it int as we continue the loop
 
@@ -151,9 +149,7 @@ def converter(init_number, init_base, target_base):
         return init_number,None
 
     if init_number == "0":
-        return init_number,None
-
-    target_number = init_number
+        return init_number,None #0 c'est toujours 0 peu importe la base + 0 faisait crash le code en input donc j'ai rajouté cette ligne 
 
     # Converting the number to decimal if not already done
     if init_base == "bin":

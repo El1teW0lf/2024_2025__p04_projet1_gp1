@@ -217,7 +217,6 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     print(menu_text)
 
 def get_input_live(number="", base="", target=""):
-    # Assuming `back_up()` and `get_menu_text()` are defined elsewhere
     clear()
     back_up()
     get_menu_text(number=number, base=base, target=target)

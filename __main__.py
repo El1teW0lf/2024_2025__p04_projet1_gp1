@@ -77,5 +77,7 @@ if __name__ == "__main__":
         print(result, mess)
         ui.main(result=result, error=mess, number=number, base=base, target=target)
 
+        while True:
+            pass
     elif launch == 3:
         tests.run_tests()

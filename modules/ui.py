@@ -215,58 +215,88 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     # Finalisation et affichage du menu
     menu_text = center_text_height(menu_text)
     print(menu_text)
-def handle_input(current_input, status, number="", base="", target=""):
-    """Handles the core input logic for number, base, and target."""
-    while True:
-        event = keyboard.read_event()
-        if event.event_type == keyboard.KEY_DOWN:
-            key = event.name
-
-            # Return the current state when 'enter' is pressed
-            if key == 'enter':
-                return current_input
-
-            # Handle delete/backspace to remove the last character
-            elif key in ['delete', 'backspace']:
-                current_input = current_input[:-1]
-
-            # Exit the function when 'esc' is pressed
-            elif key == 'esc':
-                raise Exception("Exited.")
-
-            # Add characters based on CHAR_MAP or alphanumeric keys
-            elif key in data.ui["CHAR_MAP"]:
-                current_input += data.ui["CHAR_MAP"][key]
-            elif len(key) == 1:  # Alphanumeric characters
-                current_input += key
-
-        # Call the display function to show the updated input
-        back_up()
-        get_menu_text(number=number if status != 0 else current_input,
-                      base=base if status != 1 else current_input,
-                      target=target if status != 2 else current_input,
-                      status=status)
 
 def get_input_live(number="", base="", target=""):
-    """Main function to handle the input collection process for number, base, and target."""
+    # Assuming `back_up()` and `get_menu_text()` are defined elsewhere
     clear()
     back_up()
     get_menu_text(number=number, base=base, target=target)
 
-    # Collect the number input if not already provided
-    if number == "":
-        number = handle_input(number, status=0)
+    if number is "":
+        number = ""
 
-    # Collect the base input if not already provided
-    if base == "":
-        base = handle_input(base, status=1, number=number)
+        while True:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                key = event.name
+                if key == 'enter':
+                    return (number, "", "")
+                elif key == 'delete' or key == "backspace":
+                    number = number[:-1]
 
-    # Collect the target input if not already provided
-    if target == "":
-        target = handle_input(target, status=2, number=number, base=base)
+                # Handle 'esc' key to exit the function
+                elif key == 'esc':
+                    raise Exception("Exited.")
 
-    return number, base, target
+                # Ignore special keys and control characters (e.g., shift, ctrl)
+                elif key in data.ui["CHAR_MAP"]:
+                                number += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
 
+                # Otherwise, add normal alphanumeric characters to the input
+                elif len(key) == 1:
+                    number += key
+
+                # Call the display function to show the updated input
+            back_up()
+            get_menu_text(number=number, base="", target="", status=0)
+    
+    elif base == "":
+        base = ""
+
+        while True:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                key = event.name
+                if key == 'enter':
+                    return (number, base, "")
+                elif key == 'delete' or key == "backspace":
+                    base = base[:-1]
+
+                # Handle 'esc' key to exit the function
+                elif key == 'esc':
+                    raise Exception("Exited.")
+
+                # Ignore special keys and control characters (e.g., shift, ctrl)
+                elif key in data.ui["CHAR_MAP"]:
+                                base += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
+
+                # Call the display function to show the updated input
+            back_up()
+            get_menu_text(number=number, base=base, target="", status=1)
+            
+    elif target == "":
+        target = ""
+
+        while True:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                key = event.name
+                if key == 'enter':
+                    return (number, base, target)
+                elif key == 'delete' or key == "backspace":
+                    target = target[:-1]
+
+                # Handle 'esc' key to exit the function
+                elif key == 'esc':
+                    raise Exception("Exited.")
+
+                # Ignore special keys and control characters (e.g., shift, ctrl)
+                elif key in data.ui["CHAR_MAP"]:
+                                target += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
+
+                # Call the display function to show the updated input
+            back_up()
+            get_menu_text(number=number, base=base, target=target, status=2)
         
 
 

@@ -1,10 +1,12 @@
 import sys
 import modules.ui as ui
+import time
 import modules.tests as tests
 import modules.converter as converter
 import modules.data as Data
 from modules.logger import LOG
 import sys
+from getpass import getpass
 import subprocess
 import pkg_resources
 
@@ -37,8 +39,8 @@ def detect_launch_type():
 
     return launch_type
 
-if __name__ == "__main__":
-    
+def run():
+   
     LOG("Started BCONVERT",0)
 
     assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
@@ -77,7 +79,10 @@ if __name__ == "__main__":
         print(result, mess)
         ui.main(result=result, error=mess, number=number, base=base, target=target)
 
-        while True:
-            pass
     elif launch == 3:
         tests.run_tests()
+
+if __name__ == "__main__":
+    while True:
+        run()
+        time.sleep(5)

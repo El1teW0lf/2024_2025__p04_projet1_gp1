@@ -1,7 +1,7 @@
 <h1 align="center">
 <img src="https://www.mediafire.com/file_premium/mnbpyuf9raqtih7/image-removebg-preview_%25283%2529.png/file">
 
-  Projet de NSI n°1: Convertiseur de Base: BCONVERT
+  Projet de NSI N°1 : Convertiseur de Base : BCONVERT
 
   <img src="http://ForTheBadge.com/images/badges/built-with-swag.svg">
   <img src="https://forthebadge.com/images/badges/made-with-python.svg">
@@ -25,11 +25,11 @@
 
 # 🗂️ • Modules :
 
-* #### ```Converter.py ``` >>> Programme principal chargé de la converstion
-* #### ```Ui.py ``` >>> Programme destiné à l'interface de l'utilisateur
-* #### ```Tests.py ``` >>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
-* #### ```Logger.py ``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
-* #### ```Data.py ``` >>> Programme desitiné à la définition des fonctions tiers
+* #### ```Converter.py``` >>> Programme principal chargé de la converstion
+* #### ```Ui.py``` >>> Programme destiné à l'interface de l'utilisateur
+* #### ```Tests.py``` >>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
+* #### ```Logger.py``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
+* #### ```Data.py``` >>> Programme desitiné à la définition des fonctions tiers
 
 # ⚙️ • Fonctionnement :
 

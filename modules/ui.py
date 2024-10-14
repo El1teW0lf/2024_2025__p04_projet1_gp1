@@ -12,6 +12,7 @@ import sys
 
 data = DATA()
 
+blank_char = " "
 
 logo = data.ui["LOGO"]
 color_1 = data.ui["COLOR_1"]
@@ -48,18 +49,20 @@ def get_terminal_size():
     return size.columns, size.lines
 
 
-def add_blank_to_text(text: str, number: int):
-    return " " * number + text + " " * number
+def add_blank_to_text(text: str, number: int,total: int = None):
+
+    if total == None: total = number * 2
+    return blank_char * number + text + blank_char * (total - number)
 
 
 # Centre le texte sur l'axe horizontale en fonction de sa taille et de la taille du terminal, accepte le multiligne
-def center_text_width(text: str, half: int):
+def center_text_width(text: str, half: int, total: int):
     lines = text.splitlines()
 
     result = ""
 
     for i in lines:
-        result += add_blank_to_text(i, half)
+        result += add_blank_to_text(i, half, total=total)
         result += "\n"
 
     return result
@@ -75,12 +78,12 @@ def center_text_width_from_other(text: str, cleared: str = None):
     current_text_size = get_text_bounding_box(cleared)
     half_size_to_add = math.floor((terminal_size[0] - current_text_size[0]) / 2)
 
-    return center_text_width(text=text, half=half_size_to_add)
+    return center_text_width(text=text, half=half_size_to_add, total=terminal_size[0]- current_text_size[0])
 
 
 # Permet simplement d'avoir le text formater representant un saut de ligne de number lignes.
 def line_skip(number: int):
-    return center_text_width_from_other(" ") * number
+    return center_text_width_from_other(blank_char) * number
 
 
 # Permet de centrer un texte sur l'axe verticale en fonction de sa taille et de la taille du terminal
@@ -206,13 +209,16 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     if status == 3:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Résultat: {result}")
-
+ 
     # Affichage de l'erreur
     if status == 4:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Erreur: {error}")
+        
 
     # Finalisation et affichage du menu
+    menu_text += line_skip(1)
+    menu_text += center_and_gradient("[Entrée pour continuer.]")
     menu_text = center_text_height(menu_text)
     print(menu_text)
 

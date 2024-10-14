@@ -8,6 +8,7 @@ import sys
 from getpass import getpass
 import subprocess
 import pkg_resources
+import modules.keyboard as keyboard
 
 #Verifie si le modules "pynput", nécessaire est disponible
 
@@ -86,4 +87,13 @@ def run():
 if __name__ == "__main__":
     while True:
         run()
-        time.sleep(5)
+        time.sleep(0.5)
+        while True:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                key = event.name
+                if key == 'enter':
+                    break
+                elif key == 'esc':
+                    raise Exception("Exited.")
+

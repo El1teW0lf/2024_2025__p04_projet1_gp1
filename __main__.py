@@ -1,5 +1,4 @@
 import sys
-import modules.ui as ui
 import time
 import modules.tests as tests
 import modules.converter as converter
@@ -43,7 +42,9 @@ def run():
    
     LOG("Started BCONVERT",0)
 
-    assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
+    #assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
+
+    import modules.ui as ui
     
     launch = detect_launch_type()
     LOG(f"Got launch type: {launch}",0)

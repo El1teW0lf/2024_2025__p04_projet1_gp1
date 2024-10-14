@@ -5,7 +5,7 @@ from modules.logger import LOG
 from modules.data import DATA
 import time
 import random
-import keyboard
+import modules.keyboard as keyboard
 import sys
 
 

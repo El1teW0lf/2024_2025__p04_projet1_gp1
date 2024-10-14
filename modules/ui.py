@@ -245,12 +245,9 @@ def get_input_live(number="", base="", target=""):
                     raise Exception("Exited.")
 
                 # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["CHAR_MAP"]:
-                                number += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
+                elif key in data.ui["COMPLETE_CHAT_MAP"]:
+                                number += data.ui["COMPLETE_CHAT_MAP"][key]  # Replace with corresponding number
 
-                # Otherwise, add normal alphanumeric characters to the input
-                elif len(key) == 1:
-                    number += key
 
                 # Call the display function to show the updated input
             back_up()
@@ -273,8 +270,8 @@ def get_input_live(number="", base="", target=""):
                     raise Exception("Exited.")
 
                 # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["CHAR_MAP"]:
-                                base += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
+                elif key in data.ui["INT_CHAR_MAP"]:
+                                base += data.ui["INT_CHAR_MAP"][key]  # Replace with corresponding number
 
                 # Call the display function to show the updated input
             back_up()
@@ -297,8 +294,8 @@ def get_input_live(number="", base="", target=""):
                     raise Exception("Exited.")
 
                 # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["CHAR_MAP"]:
-                                target += data.ui["CHAR_MAP"][key]  # Replace with corresponding number
+                elif key in data.ui["INT_CHAR_MAP"]:
+                                target += data.ui["INT_CHAR_MAP"][key]  # Replace with corresponding number
 
                 # Call the display function to show the updated input
             back_up()

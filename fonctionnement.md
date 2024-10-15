@@ -172,3 +172,56 @@ La classe `DATA` sert à centraliser la gestion des données et des messages d'e
 
 La classe `DATA` est conçue pour fournir une structure claire et accessible pour gérer les erreurs, les conversions et les paramètres d'interface utilisateur dans le cadre d'une application de conversion de bases. Cela permet de centraliser les messages et les constantes, facilitant ainsi la maintenance et l'évolution du code.
 
+<h1 align="center"> 
+   Keyboard :
+</h1>
+
+Le module `keyboard` est une bibliothèque Python qui permet de gérer les événements liés au clavier. Voici une description détaillée de ses fonctionnalités et de son utilisation :
+
+#### Description détaillée
+
+1. **Détection des touches** :
+   - Permet de détecter quand une touche est pressée ou relâchée.
+   - Utilisation de `keyboard.is_pressed('touche')` pour vérifier si une touche est actuellement enfoncée.
+
+2. **Événements de clavier** :
+   - Vous pouvez écouter des événements de clavier avec des fonctions comme `keyboard.on_press()` et `keyboard.on_release()`, qui vous permettent de définir des rappels (callbacks) qui s'exécutent lorsque des touches spécifiques sont pressées ou relâchées.
+
+3. **Simulation de frappes** :
+   - La fonction `keyboard.write()` permet de simuler la saisie de texte, tandis que `keyboard.press()` et `keyboard.release()` simulent l'appui et le relâchement de touches individuelles.
+
+4. **Raccourcis clavier** :
+   - Vous pouvez créer des raccourcis en utilisant `keyboard.add_hotkey('combinaison', fonction)` pour exécuter une fonction spécifiée lorsque la combinaison de touches est enfoncée.
+
+5. **Enregistrement des frappes** :
+   - Le module permet également d'enregistrer toutes les frappes au clavier, utile pour les applications de surveillance ou de diagnostic.
+
+6. **Support multi-plateforme** :
+   - Fonctionne sur Windows, macOS et certaines distributions Linux, bien que des permissions d'administrateur puissent être requises pour certaines fonctionnalités.
+
+7. **Utilisation avancée** :
+   - Possibilité de gérer des événements globaux (qui fonctionnent même si votre application n'est pas en avant-plan) et de configurer des délais ou des intervalles entre les frappes simulées.
+
+#### Exemple de code
+
+Voici un exemple de code montrant quelques-unes de ces fonctionnalités :
+
+```Python
+import keyboard
+
+# Écouteur d'événements
+def on_key_event(event):
+    print(f'Touche {event.name} {event.event_type}')
+
+keyboard.hook(on_key_event)
+
+# Simuler l'appui sur une touche
+keyboard.press('a')
+keyboard.release('a')
+
+# Ajouter un raccourci clavier
+keyboard.add_hotkey('ctrl+c', lambda: print('Copié !'))
+
+# Boucle principale
+keyboard.wait('esc')  # Attendre que 'esc' soit pressé pour quitter
+```

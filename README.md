@@ -30,7 +30,12 @@
 * #### ```Tests.py``` >>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
 * #### ```Logger.py``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
 * #### ```Data.py``` >>> Programme desitiné à la définition des fonctions tiers
+* #### ```Keyboard``` >>> Module python
 
 # ⚙️ • Fonctionnement :
 
 ### [Clique sur le lien 👈](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/fonctionnement.md)
+
+# 💡 • Assistance :
+
+* #### [```Help```](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/modules/Help.bat) >>> Lancement instantané du projet

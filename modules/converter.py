@@ -103,7 +103,7 @@ def check_if_valid_input(number, base, target):
     # Dictionnaire pour associer chaque base à son validateur de caractères
     base_validators = {
         "hex": lambda c: c in hex_map,
-        "dec": lambda c: c.isdigit(),
+        "dec": lambda c: c.isdigit() or c == "-",
         "bin": lambda c: c in "01",
     }
 
@@ -126,14 +126,21 @@ def check_if_valid_input(number, base, target):
             return False, error_key
 
     # Vérification des nombres décimaux négatifs
-    if base == "dec" and int(number) < 0:
-        LOG(data.get_error("INVALID_SIGN"), 3)
-        return False, "INVALID_SIGN"
+    
 
     return True,""
 
 #J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
 def converter(init_number, init_base, target_base):
+    is_negative = False
+    init_number = str(init_number)
+    for c in init_number:
+        if c == "-":
+            init_number = init_number.replace("-", "")
+            is_negative = True
+        else:
+            is_negative = False
+    
     init_number = str(init_number).lower()
     valid, mess = check_if_valid_input(init_number, init_base, target_base)
    
@@ -162,5 +169,11 @@ def converter(init_number, init_base, target_base):
         return dec_to_bin(init_number),None
     elif target_base == "hex":
         return dec_to_hex(init_number),None
+    
+    init_number = str(init_number)
+
+    if is_negative == True:
+        init_number = "-" + init_number
 
     return str(init_number),None
+

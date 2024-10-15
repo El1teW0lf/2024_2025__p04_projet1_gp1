@@ -78,6 +78,7 @@ def test_check_if_valid_input():
 def test_converter():
     """Test cases to verify base conversions."""
     error_counter = [0]  # Use a list to allow mutation
+    assert_conversion("-23", DECIMAL, BINARY, "-10111",  error_counter)  # decimal to binary
 
     # Binary to other bases
     assert_conversion("1010", BINARY, HEXADECIMAL, "a", error_counter)

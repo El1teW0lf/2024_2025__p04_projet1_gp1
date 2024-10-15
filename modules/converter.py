@@ -133,13 +133,16 @@ def check_if_valid_input(number, base, target):
 #J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
 def converter(init_number, init_base, target_base):
     is_negative = False
+
     init_number = str(init_number)
-    for c in init_number:
-        if c == "-":
+    for c in range(len(init_number)):
+        if init_number[c] == "-" and c == 0:
             init_number = init_number.replace("-", "")
             is_negative = True
-        else:
-            is_negative = False
+
+        elif init_number[c] == "-" and c != 0:
+            LOG(data.get_error("MALFORMED_NUMBER"), 3)
+            return False,data.get_error("MALFORMED_NUMBER")
     
     init_number = str(init_number).lower()
     valid, mess = check_if_valid_input(init_number, init_base, target_base)
@@ -148,14 +151,20 @@ def converter(init_number, init_base, target_base):
         if not valid:
             return False, mess
     except:
-        LOG(data.get_error("Unknown", 3))
+        LOG(data.get_error("Unknown"),3)
         return False,mess
+    
+
+
 
     # Errors handled, we can start the convertion
     if init_base == target_base:
+
+        if is_negative: init_number = "-" + init_number
         return init_number,None
 
     if init_number == "0":
+        if is_negative: init_number = "-" + init_number
         return init_number,None #0 c'est toujours 0 peu importe la base + 0 faisait crash le code en input donc j'ai rajouté cette ligne 
 
     # Converting the number to decimal if not already done
@@ -166,14 +175,13 @@ def converter(init_number, init_base, target_base):
 
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
-        return dec_to_bin(init_number),None
+        value = dec_to_bin(init_number)
+        if is_negative: value = "-" + value
+        return value,None
     elif target_base == "hex":
-        return dec_to_hex(init_number),None
-    
-    init_number = str(init_number)
-
-    if is_negative == True:
-        init_number = "-" + init_number
-
+        value = dec_to_hex(init_number)
+        if is_negative: value = "-" + value
+        return value,None
+    if is_negative: init_number = "-" + init_number
     return str(init_number),None
 

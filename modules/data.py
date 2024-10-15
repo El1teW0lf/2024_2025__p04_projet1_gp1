@@ -8,7 +8,8 @@ class DATA:
             "NOT_BINARY_NUMBER": "Ce n'est pas un nombre binaire",
             "NON_NUMERIC_CHARACTER": "Cela contient des caractères non numériques",
             "INVALID_SIGN": "Le nombre doit être >= 0",
-            "MISSING_PACKAGES": "Vous avez besoin du paquet 'keyboard' pour exécuter ce projet. Veuillez exécuter 'pip install .'"
+            "MISSING_PACKAGES": "Vous avez besoin du paquet 'keyboard' pour exécuter ce projet. Veuillez exécuter 'pip install .'",
+            "MALFORMED_NUMBER": "Le nombre est malformé."
         }
 
 

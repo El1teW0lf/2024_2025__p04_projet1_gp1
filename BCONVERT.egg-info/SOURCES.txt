@@ -1,8 +1,0 @@
-LICENSE
-README.md
-setup.py
-BCONVERT.egg-info/PKG-INFO
-BCONVERT.egg-info/SOURCES.txt
-BCONVERT.egg-info/dependency_links.txt
-BCONVERT.egg-info/requires.txt
-BCONVERT.egg-info/top_level.txt

@@ -1,5 +1,4 @@
 import sys
-import modules.ui as ui
 import time
 import modules.tests as tests
 import modules.converter as converter
@@ -9,6 +8,7 @@ import sys
 from getpass import getpass
 import subprocess
 import pkg_resources
+import modules.keyboard as keyboard
 
 #Verifie si le modules "pynput", nécessaire est disponible
 
@@ -43,7 +43,9 @@ def run():
    
     LOG("Started BCONVERT",0)
 
-    assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
+    #assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
+
+    import modules.ui as ui
     
     launch = detect_launch_type()
     LOG(f"Got launch type: {launch}",0)
@@ -85,4 +87,13 @@ def run():
 if __name__ == "__main__":
     while True:
         run()
-        time.sleep(5)
+        time.sleep(0.5)
+        while True:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                key = event.name
+                if key == 'enter':
+                    break
+                elif key == 'esc':
+                    raise Exception("Exited.")
+

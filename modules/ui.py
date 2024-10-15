@@ -186,150 +186,140 @@ def apply_color_gradient(text: str, gradient: list):
 
     return final_text
 
+
+def display_status(text: str, current_status: int, target_status: int) -> str:
+    """Affiche le texte avec une flèche si le statut correspond."""
+    return center_and_gradient(f"=> {text}" if current_status == target_status else text)
+
 # Permet de recupere le texte pour le rendu du menu principal
-def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status:int = 0):
+def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0):
+    """Affiche le menu avec les informations saisies et les messages en fonction du statut."""
+
     menu_text = ""
 
+    # Afficher le logo et le titre du projet
     menu_text += center_and_gradient(logo)
     menu_text += center_and_gradient("Groupe 1; Projet 1")
     menu_text += line_skip(2)
 
     # Affichage du nombre source
-    menu_text += center_and_gradient(f"=> Nombre Source: {number}" if status == 0 else f"Nombre Source: {number}")
+    menu_text += display_status(f"Nombre Source: {number}", status, 0)
 
     # Affichage de la base de départ
     base_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base de départ: "
-    menu_text += center_and_gradient(f"=> {base_prompt} {base}" if status == 1 else f"{base_prompt} {base}")
+    menu_text += display_status(f"{base_prompt} {base}", status, 1)
 
+    # Affichage de la base d'arrivée
+    target_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: "
+    menu_text += display_status(f"{target_prompt} {target}", status, 2)
 
-    base_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: "
-    menu_text += center_and_gradient(f"=> {base_prompt} {target}" if status == 2 else f"{base_prompt} {target}")
-
-    # Affichage du résultat
+    # Affichage du résultat si status = 3
     if status == 3:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Résultat: {result}")
- 
-    # Affichage de l'erreur
+
+    # Affichage de l'erreur si status = 4
     if status == 4:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Erreur: {error}")
-        
 
-    # Finalisation et affichage du menu
+    # Finalisation du menu
     menu_text += line_skip(1)
     menu_text += center_and_gradient("[Entrée pour continuer.]")
+
+    # Centrer le texte sur la hauteur et afficher
     menu_text = center_text_height(menu_text)
     print(menu_text)
 
-def get_input_live(number="", base="", target=""):
-    # Assuming `back_up()` and `get_menu_text()` are defined elsewhere
-    clear()
+
+
+def process_key_input(value, key_map):
+    event = keyboard.read_event()
+    if event.event_type == keyboard.KEY_DOWN:
+        key = event.name
+        if key == 'enter':
+            return value, True  # Retourner la valeur et signaler la fin de la saisie
+        elif key in ['delete', 'backspace']:
+            value = value[:-1]  # Supprimer le dernier caractère
+        elif key == 'esc':
+            raise Exception("Exited.")  
+        elif key in key_map:
+            value += key_map[key]  # Ajouter le caractère correspondant
+    return value, False
+
+
+def update_display(number, base, target, status):
     back_up()
-    get_menu_text(number=number, base=base, target=target)
-
-    if number is "":
-        number = ""
-
-        while True:
-            event = keyboard.read_event()
-            if event.event_type == keyboard.KEY_DOWN:
-                key = event.name
-                if key == 'enter':
-                    return (number, "", "")
-                elif key == 'delete' or key == "backspace":
-                    number = number[:-1]
-
-                # Handle 'esc' key to exit the function
-                elif key == 'esc':
-                    raise Exception("Exited.")
-
-                # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["COMPLETE_CHAT_MAP"]:
-                                number += data.ui["COMPLETE_CHAT_MAP"][key]  # Replace with corresponding number
+    get_menu_text(number=number, base=base, target=target, status=status)
 
 
-                # Call the display function to show the updated input
-            back_up()
-            get_menu_text(number=number, base="", target="", status=0)
+def input_loop(value, key_map, number, base, target, status):
+    while True:
+        if status == 0:
+            update_display(value, base, target, status)  
+        elif status == 1:
+            update_display(number, value, target, status)  
+        elif status == 2:
+            update_display(number, base, value, status) 
+
+        value, done = process_key_input(value, key_map)
+
+        if done:
+            return value
+
+def get_input_live(number="", base="", target=""):    
+    clear()
+    if number == "":
+        number = input_loop(number, data.ui["COMPLETE_CHAT_MAP"], number, base, target, 0)
     
-    elif base == "":
-        base = ""
+    if base == "":
+        base = input_loop(base, data.ui["INT_CHAR_MAP"], number, base, target, 1)
 
-        while True:
-            event = keyboard.read_event()
-            if event.event_type == keyboard.KEY_DOWN:
-                key = event.name
-                if key == 'enter':
-                    return (number, base, "")
-                elif key == 'delete' or key == "backspace":
-                    base = base[:-1]
+    if target == "":
+        target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target, 2)
 
-                # Handle 'esc' key to exit the function
-                elif key == 'esc':
-                    raise Exception("Exited.")
+    return number, base, target
 
-                # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["INT_CHAR_MAP"]:
-                                base += data.ui["INT_CHAR_MAP"][key]  # Replace with corresponding number
-
-                # Call the display function to show the updated input
-            back_up()
-            get_menu_text(number=number, base=base, target="", status=1)
-            
-    elif target == "":
-        target = ""
-
-        while True:
-            event = keyboard.read_event()
-            if event.event_type == keyboard.KEY_DOWN:
-                key = event.name
-                if key == 'enter':
-                    return (number, base, target)
-                elif key == 'delete' or key == "backspace":
-                    target = target[:-1]
-
-                # Handle 'esc' key to exit the function
-                elif key == 'esc':
-                    raise Exception("Exited.")
-
-                # Ignore special keys and control characters (e.g., shift, ctrl)
-                elif key in data.ui["INT_CHAR_MAP"]:
-                                target += data.ui["INT_CHAR_MAP"][key]  # Replace with corresponding number
-
-                # Call the display function to show the updated input
-            back_up()
-            get_menu_text(number=number, base=base, target=target, status=2)
-        
 
 
 
 def main(error=None, result=None, number=None, base=None, target=None):
+
     clear()
 
-    if error is not None:
-        get_menu_text(error=data.errors[error], status=4)
+    if error:
+        display_error(error)
         return
 
     if result is None:
-        
-        number = base = target = ""
-        LOG("Started input fetching.",0)
-        count = 0
-        
-        while number == "" or base == "" or target == "" :
-        
-        
-            number,base,target = get_input_live(number=number,target=target,base=base)
-            LOG(f"Got input number:{number}, target:{target}, base:{base} from iteration: {count}",0)
-            
-            count += 1
-
-
+        number, base, target = collect_inputs()
         return number, base, target
-    else:
-        back_up()
-        get_menu_text(number=number, base=base, target=target, result=result, status=3)
+
+
+    display_result(number, base, target, result)
+
+
+def display_error(error):
+    get_menu_text(error=data.errors[error], status=4)
+
+
+def collect_inputs():
+    number = base = target = ""
+    LOG("Started input fetching.", 0)
+    count = 0
+
+    while not (number and base and target):
+        number, base, target = get_input_live(number=number, target=target, base=base)
+        LOG(f"Got input number:{number}, target:{target}, base:{base} from iteration: {count}", 0)
+        count += 1
+
+    return number, base, target
+
+
+def display_result(number, base, target, result):
+    back_up()
+    get_menu_text(number=number, base=base, target=target, result=result, status=3)
+
 
 
 def get_input(prompt, convert_to=str):

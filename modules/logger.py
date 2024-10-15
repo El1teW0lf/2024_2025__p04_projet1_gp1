@@ -1,7 +1,7 @@
 import time
 from modules.data import DATA
 
-lvl = 0
+lvl = 1
 PREFIX = DATA().log["PREFIX"]
 
 logfile = "logs.txt"

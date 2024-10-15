@@ -1,15 +1,16 @@
 class DATA:
     def __init__(self):
         self.errors = {
-            "INVALID_START_BASE": "Please enter a valid init base",
-            "INVALID_TARGET_BASE": "Please enter a valid target base",
-            "NOT_HEX_NUMBER": "This is not a hexadecimal number",
-            "NOT_DECIMAL_NUMBER": "This is not a decimal number",
-            "NOT_BINARY_NUMBER": "This is not a binary number",
-            "NON_NUMERIC_CHARACTER": "This contains non-numeric characters",
-            "INVALID_SIGN": "The number should be >= 0",
-            "MISSING_PACKAGES": "You need the keyboard package to run this project. Please run 'pip install .'"
+            "INVALID_START_BASE": "Veuillez entrer une base de départ valide",
+            "INVALID_TARGET_BASE": "Veuillez entrer une base cible valide",
+            "NOT_HEX_NUMBER": "Ce n'est pas un nombre hexadécimal",
+            "NOT_DECIMAL_NUMBER": "Ce n'est pas un nombre décimal",
+            "NOT_BINARY_NUMBER": "Ce n'est pas un nombre binaire",
+            "NON_NUMERIC_CHARACTER": "Cela contient des caractères non numériques",
+            "INVALID_SIGN": "Le nombre doit être >= 0",
+            "MISSING_PACKAGES": "Vous avez besoin du paquet 'keyboard' pour exécuter ce projet. Veuillez exécuter 'pip install .'"
         }
+
 
         self.convert = {
             "HEXA_MAP": [

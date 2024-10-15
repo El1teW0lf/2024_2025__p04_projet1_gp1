@@ -194,7 +194,7 @@ def display_status(text: str, current_status: int, target_status: int) -> str:
 # Permet de recupere le texte pour le rendu du menu principal
 def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0):
     """Affiche le menu avec les informations saisies et les messages en fonction du statut."""
-
+    
     menu_text = ""
 
     # Afficher le logo et le titre du projet
@@ -217,19 +217,25 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     if status == 3:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Résultat: {result}")
-
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient("Appuyez sur [Entrée] pour recommencer ou [Esc] pour quitter.")
+    
     # Affichage de l'erreur si status = 4
-    if status == 4:
+    elif status == 4:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Erreur: {error}")
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient("Appuyez sur [Entrée] pour recommencer ou [Esc] pour quitter.")
 
-    # Finalisation du menu
-    menu_text += line_skip(1)
-    menu_text += center_and_gradient("[Entrée pour continuer.]")
+    # Sinon, finalisation du menu par défaut
+    else:
+        menu_text += line_skip(1)
+        menu_text += center_and_gradient("[Entrée pour continuer.]")
 
     # Centrer le texte sur la hauteur et afficher
     menu_text = center_text_height(menu_text)
     print(menu_text)
+
 
 
 

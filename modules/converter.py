@@ -94,7 +94,7 @@ def complement_of_2(init_number):
         init_number = init_number.replace("1", "0")  #
         init_number = init_number.replace("2", "1")
 
-    elif init_number[0] == 0:
+    elif init_number[0] == "0":
         init_number = init_number.replace("0", "2") 
         init_number = init_number.replace("1", "0")  #
         init_number = init_number.replace("2", "1")

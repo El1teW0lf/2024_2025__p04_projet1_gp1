@@ -27,10 +27,11 @@ colored = data.ui["COLORED"]
 
 # Permet de 'clear' le terminal, de tout suprimer
 def back_up():
-    print("\033[H", end="") 
+ print("\033[H", end="") 
 
 def clear():
-    print(chr(27) + "[2J")
+  print(chr(27) + "[2J")
+ 
 
 # Détermine la taille sur l'ecran d'un text donné, avec la taille en ligne et en colone.
 def get_text_bounding_box(text: str):
@@ -192,7 +193,7 @@ def display_status(text: str, current_status: int, target_status: int) -> str:
     return center_and_gradient(f"=> {text}" if current_status == target_status else text)
 
 # Permet de recupere le texte pour le rendu du menu principal
-def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0):
+def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0, from_signed: str = "", to_signed: str = ""):
     """Affiche le menu avec les informations saisies et les messages en fonction du statut."""
     
     menu_text = ""
@@ -206,22 +207,31 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     menu_text += display_status(f"Nombre Source: {number}", status, 0)
 
     # Affichage de la base de départ
+
     base_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base de départ: "
     menu_text += display_status(f"{base_prompt} {base}", status, 1)
 
+    if from_signed != "":
+        base_prompt = "[0: Non, 1: Oui] Binaire Signé ?: "
+        menu_text += display_status(f"{base_prompt} {from_signed}", status, 2)
+
     # Affichage de la base d'arrivée
     target_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: "
-    menu_text += display_status(f"{target_prompt} {target}", status, 2)
+    menu_text += display_status(f"{target_prompt} {target}", status, 3)
+
+    if to_signed != "":
+        base_prompt = "[0: Non, 1: Oui] Binaire Signé ?: "
+        menu_text += display_status(f"{base_prompt} {to_signed}", status, 4)
 
     # Affichage du résultat si status = 3
-    if status == 3:
+    if status == 5:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Résultat: {result}")
         menu_text += line_skip(1)
         menu_text += center_and_gradient("Appuyez sur [Entrée] pour recommencer ou [Esc] pour quitter.")
     
     # Affichage de l'erreur si status = 4
-    elif status == 4:
+    elif status == 6:
         menu_text += line_skip(1)
         menu_text += center_and_gradient(f"=> Erreur: {error}")
         menu_text += line_skip(1)
@@ -261,11 +271,12 @@ def update_display(number, base, target, status):
 
 def input_loop(value, key_map, number, base, target, status):
     while True:
+
         if status == 0:
             update_display(value, base, target, status)  
         elif status == 1:
             update_display(number, value, target, status)  
-        elif status == 2:
+        elif status == 3:
             update_display(number, base, value, status) 
 
         value, done = process_key_input(value, key_map)
@@ -275,6 +286,7 @@ def input_loop(value, key_map, number, base, target, status):
 
 def get_input_live(number="", base="", target=""):    
     clear()
+
     if number == "":
         number = input_loop(number, data.ui["COMPLETE_CHAT_MAP"], number, base, target, 0)
     
@@ -282,7 +294,7 @@ def get_input_live(number="", base="", target=""):
         base = input_loop(base, data.ui["INT_CHAR_MAP"], number, base, target, 1)
 
     if target == "":
-        target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target, 2)
+        target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target,3)
 
     return number, base, target
 
@@ -306,7 +318,10 @@ def main(error=None, result=None, number=None, base=None, target=None):
 
 
 def display_error(error):
-    get_menu_text(error=data.errors[error], status=4)
+    if error in data.errors:
+        get_menu_text(error=data.errors[error], status=6)
+    else:
+        get_menu_text(error=f"Erreur Python: {error}", status=6)
 
 
 def collect_inputs():
@@ -324,7 +339,7 @@ def collect_inputs():
 
 def display_result(number, base, target, result):
     back_up()
-    get_menu_text(number=number, base=base, target=target, result=result, status=3)
+    get_menu_text(number=number, base=base, target=target, result=result, status=5)
 
 
 

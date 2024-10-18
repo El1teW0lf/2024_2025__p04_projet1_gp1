@@ -81,6 +81,27 @@ def bin_to_dec(init_number):
 
     return str(target_number)
 
+def complement_of_2(init_number):
+    if init_number[0] == "1":
+        '''
+            méthode du complément à 2 à  partir d'un nombre negatif (1 en premier chiffre), donc étapes inverses
+        '''
+        init_number = bin_to_dec(init_number)
+        init_number = int(init_number) - 1 # on soustrait d'abord 1 au nombre source
+        init_number = dec_to_bin(str(init_number))
+        # puis on inverse chaque chiffre du nombre source
+        init_number = init_number.replace("0", "2") 
+        init_number = init_number.replace("1", "0")  #
+        init_number = init_number.replace("2", "1")
+
+    elif init_number[0] == 0:
+        init_number = init_number.replace("0", "2") 
+        init_number = init_number.replace("1", "0")  #
+        init_number = init_number.replace("2", "1")
+        init_number = bin_to_dec(init_number)
+        init_number = int(init_number) + 1 
+        init_number = dec_to_bin(str(init_number))
+    return init_number
 
 def check_if_valid_input(number, base, target):
     """
@@ -131,7 +152,7 @@ def check_if_valid_input(number, base, target):
     return True,""
 
 #J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
-def converter(init_number, init_base, target_base):
+def converter(init_number, init_base, target_base, from_signed = None, to_signed = None):
     is_negative = False
 
     init_number = str(init_number)
@@ -169,14 +190,32 @@ def converter(init_number, init_base, target_base):
 
     # Converting the number to decimal if not already done
     if init_base == "bin":
-        init_number = bin_to_dec(init_number)
+        if from_signed == True:
+            if init_number[0] == "0":
+                init_number = bin_to_dec(init_number)
+            elif init_number[0] == "1":
+                is_negative = True
+                init_number = complement_of_2(init_number)
+        else:
+            init_number = bin_to_dec(init_number)
+
     elif init_base == "hex":
         init_number = hex_to_dec(init_number)
 
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
-        value = dec_to_bin(init_number)
+        
+        if to_signed == True:
+            if int(init_number) > 0:
+                value = dec_to_bin(init_number)
+                value = "0" + value
+            elif is_negative:
+                value = dec_to_bin(init_number)
+                value =  complement_of_2(value)
+
+
         if is_negative: value = "-" + value
+        
         return value,None
     elif target_base == "hex":
         value = dec_to_hex(init_number)

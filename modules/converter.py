@@ -135,7 +135,8 @@ def converter(init_number, init_base, target_base):
     is_negative = False
 
     init_number = str(init_number)
-    for c in range(len(init_number)):
+
+    for c in range(len(init_number)-1):
         if init_number[c] == "-" and c == 0:
             init_number = init_number.replace("-", "")
             is_negative = True
@@ -143,10 +144,10 @@ def converter(init_number, init_base, target_base):
         elif init_number[c] == "-" and c != 0:
             LOG(data.get_error("MALFORMED_NUMBER"), 3)
             return False,data.get_error("MALFORMED_NUMBER")
-    
+
     init_number = str(init_number).lower()
     valid, mess = check_if_valid_input(init_number, init_base, target_base)
-   
+
     try:
         if not valid:
             return False, mess
@@ -154,7 +155,6 @@ def converter(init_number, init_base, target_base):
         LOG(data.get_error("Unknown"),3)
         return False,mess
     
-
 
 
     # Errors handled, we can start the convertion
@@ -182,6 +182,8 @@ def converter(init_number, init_base, target_base):
         value = dec_to_hex(init_number)
         if is_negative: value = "-" + value
         return value,None
+    
     if is_negative: init_number = "-" + init_number
+
     return str(init_number),None
 

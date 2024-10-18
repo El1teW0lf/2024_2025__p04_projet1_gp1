@@ -306,7 +306,10 @@ def main(error=None, result=None, number=None, base=None, target=None):
 
 
 def display_error(error):
-    get_menu_text(error=data.errors[error], status=4)
+    if error in data.errors:
+        get_menu_text(error=data.errors[error], status=4)
+    else:
+        get_menu_text(error=f"Erreur Python: {error}", status=4)
 
 
 def collect_inputs():

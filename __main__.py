@@ -26,7 +26,7 @@ data = Data.DATA()
 def detect_launch_type():
     args = sys.argv
 
-    launch_type = 0 #Type de Lancement. 0 = UI, 1 = cmd mais sans la base de depart, 2 = cmd avec la base de depart., 3 = Tests
+    launch_type = 0 #Type de Lancement. 0 = UI,2 = cmd avec la base de depart., 3 = Tests
 
     if len(args) == 3:
         launch_type = 1

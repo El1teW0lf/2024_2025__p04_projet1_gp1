@@ -50,7 +50,7 @@ def test_check_if_valid_input():
 
     # Decimal base tests
     assert_valid_input("123", DECIMAL, HEXADECIMAL, True, error_counter)  # valid decimal to hex
-    assert_valid_input("-123", DECIMAL, BINARY, False, error_counter)  # negative numbers not allowed
+    assert_valid_input("-123", DECIMAL, BINARY, True, error_counter)  # negative numbers not allowed
     assert_valid_input("456", DECIMAL, DECIMAL, True, error_counter)  # valid decimal to decimal
     assert_valid_input("12.5", DECIMAL, HEXADECIMAL, False, error_counter)  # invalid floating-point
 

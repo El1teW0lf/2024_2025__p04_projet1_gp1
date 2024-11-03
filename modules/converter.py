@@ -152,11 +152,13 @@ def check_if_valid_input(number, base, target):
     return True,""
 
 #J'ai fait la fonction mais elle était moche du coup j'ai demandé à Chat GPT de remixer un coup
-def converter(init_number, init_base, target_base, from_signed = None, to_signed = None):
+def converter(init_number, init_base, target_base, from_signed = False, to_signed = False):
     is_negative = False
 
     init_number = str(init_number)
-    for c in range(len(init_number)):
+    value = ""
+  
+    for c in range(len(init_number)-1):
         if init_number[c] == "-" and c == 0:
             init_number = init_number.replace("-", "")
             is_negative = True
@@ -164,6 +166,7 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
         elif init_number[c] == "-" and c != 0:
             LOG(data.get_error("MALFORMED_NUMBER"), 3)
             return False,data.get_error("MALFORMED_NUMBER")
+    
     
     init_number = str(init_number).lower()
     valid, mess = check_if_valid_input(init_number, init_base, target_base)
@@ -190,7 +193,7 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
 
     # Converting the number to decimal if not already done
     if init_base == "bin":
-        if from_signed == True:
+        if from_signed:
             if init_number[0] == "0":
                 init_number = bin_to_dec(init_number)
             elif init_number[0] == "1":
@@ -205,16 +208,17 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
         
-        if to_signed == True:
+        value = dec_to_bin(init_number)
+        if to_signed:
             if int(init_number) > 0:
-                value = dec_to_bin(init_number)
+
                 value = "0" + value
             elif is_negative:
-                value = dec_to_bin(init_number)
+          
                 value =  complement_of_2(value)
-
-
-        if is_negative: value = "-" + value
+        else:
+       
+            if is_negative: value = "-" + value
         
         return value,None
     elif target_base == "hex":

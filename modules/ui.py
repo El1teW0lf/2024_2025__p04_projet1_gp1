@@ -18,9 +18,29 @@ logo = data.ui["LOGO"]
 color_1 = data.ui["COLOR_1"]
 color_2 = data.ui["COLOR_2"]
 
-if data.ui["RANDOM_COLORS"]:
-    color_1 = random.choice(data.ui["COLORS"])
-    color_2 = random.choice(data.ui["COLORS"])
+
+
+def randomise_colors():
+
+    global color_1
+    global color_2
+
+    if data.ui["RANDOM_COLORS"]:
+
+        index_1 = random.randint(0,len(data.ui["COLORS"])-2)
+        index_2 = index_1 + 1
+
+        indices = [index_1, index_2]
+        random.shuffle(indices)
+
+        shuffled_index_1 = indices[0]
+        shuffled_index_2 = indices[1]
+
+        color_1 = data.ui["COLORS"][shuffled_index_1]
+        color_2 = data.ui["COLORS"][shuffled_index_2]
+
+
+randomise_colors()
 
 colored = data.ui["COLORED"]
 
@@ -110,7 +130,13 @@ def center_and_gradient(text: str):
     else:
         return center_text_width_from_other(text, text)
 
+def move_cursor(x, y):
+    # ANSI escape sequence for cursor movement
+    print(f"\033[{y};{x}H", end='')
 
+# Function to hide/show the cursor
+def hide_cursor(hide=True):
+    print("\033[?25l" if hide else "\033[?25h", end='')
 
 
 
@@ -194,8 +220,8 @@ def display_status(text: str, current_status: int, target_status: int) -> str:
 
 # Permet de recupere le texte pour le rendu du menu principal
 def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0, from_signed: str = "", to_signed: str = ""):
-    """Affiche le menu avec les informations saisies et les messages en fonction du statut."""
-    
+    """Affiche le menu avec les informations saisies et les messages en fonction du statut.""" 
+
     menu_text = ""
 
     # Afficher le logo et le titre du projet
@@ -244,7 +270,14 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
 
     # Centrer le texte sur la hauteur et afficher
     menu_text = center_text_height(menu_text)
-    print(menu_text)
+
+    count = 0
+    for line in menu_text.splitlines():
+        move_cursor(0,count)
+        print(line)
+        count += 1
+
+    
 
 
 
@@ -265,7 +298,6 @@ def process_key_input(value, key_map):
 
 
 def update_display(number, base, target, status):
-    back_up()
     get_menu_text(number=number, base=base, target=target, status=status)
 
 
@@ -304,6 +336,7 @@ def get_input_live(number="", base="", target=""):
 def main(error=None, result=None, number=None, base=None, target=None):
 
     clear()
+    hide_cursor(True)
 
     if error:
         display_error(error)

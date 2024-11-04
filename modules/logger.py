@@ -17,7 +17,8 @@ def LOG(data: str, level: int):
 
     try:
         with open(logfile, "a") as file:
-            file.write(log_msg +"\n")
+           # file.write(log_msg +"\n")
+           pass
           
     except IOError as e:
         print(f"Error writing to log file: {e}")

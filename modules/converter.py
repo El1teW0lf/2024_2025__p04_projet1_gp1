@@ -220,11 +220,13 @@ def converter(init_number, init_base, target_base, from_signed = False, to_signe
        
             if is_negative: value = "-" + value
         
-        return value,None
+        return str(value), None
     elif target_base == "hex":
+
         value = dec_to_hex(init_number)
+
         if is_negative: value = "-" + value
-        return value,None
+        return str(value),None
     if is_negative: init_number = "-" + init_number
-    return str(init_number),None
+    return str(init_number), None
 

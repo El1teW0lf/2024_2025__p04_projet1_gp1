@@ -24,13 +24,13 @@ def assert_valid_input(number, source_base, target_base, expected_result, error_
         error_counter[0] += 1  # Increment the error counter
 
 
-def assert_conversion(number, source_base, target_base, expected_result, error_counter):
+def assert_conversion(number, source_base, target_base, expected_result, error_counter, from_signed = False, to_signed = False):
     """Verifies that the conversion result is as expected."""
     description = (
         f"Converting {number} from {source_base.upper()} to {target_base.upper()}"
     )
     try:
-        result,message = converter(number, source_base, target_base)
+        result,message = converter(number, source_base, target_base, from_signed, to_signed)
         assert str(result) == str(expected_result), f"Failed: {description}, got: {result}, expected: {expected_result}"
         LOG(f"{description}: ✅", 1)
     except Exception as e:
@@ -97,6 +97,11 @@ def test_converter():
     assert_conversion("0", DECIMAL, HEXADECIMAL, "0", error_counter)
     assert_conversion("0", BINARY, DECIMAL, "0", error_counter)
     assert_conversion("0", HEXADECIMAL, DECIMAL, "0", error_counter)
+
+    #signed binary
+    assert_conversion("101", BINARY, DECIMAL, "-3", error_counter, from_signed=True, to_signed=False)
+    assert_conversion("-3", DECIMAL, BINARY, "101", error_counter,  from_signed=False, to_signed=True)
+
 
     if error_counter[0] == 0:
         LOG("All conversion tests passed!", 1)

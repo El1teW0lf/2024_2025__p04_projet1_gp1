@@ -9,10 +9,10 @@
 
 # 👨‍💼 • Membres :
 ### Classe de 1ere 4, Cours de Mr Pioche
-* #### Célestin → GoldyRat
-* #### Mateo → El1teW0lf
-* #### Victor → Herasium
-* #### Benjamin → Ben-cpu-gpu
+* #### Célestin → [GoldyRat](https://github.com/GoldyRat)
+* #### Mateo → [El1teW0lf](https://github.com/El1teW0lf)
+* #### Victor → [Herasium](https://github.com/Herasium)
+* #### Benjamin → [Ben-cpu-gpu](https://github.com/Ben-cpu-gpu)
 
 
 # 🧮 • BCONVERT :
@@ -25,7 +25,7 @@
 
 # 🗂️ • Modules :
 
-* #### ```Converter.py``` >>> Programme principal chargé de la converstion
+* #### ```Converter.py``` >>> Programme principal chargé de la conversion
 * #### ```Ui.py``` >>> Programme destiné à l'interface de l'utilisateur
 * #### ```Tests.py``` >>> Programme destiné au bon fonctionnement et à la détection d'erreur de Converter.py 
 * #### ```Logger.py``` >>> Programme destiné à affficher à l'utilisateur l'erreur et son motif, et d'enregistrer pour les développeurs dans un ficher .txt 
@@ -38,4 +38,4 @@
 
 # 💡 • Assistance :
 
-### [```Help```](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/modules/Help.bat) >>> Lancement instantané du projet
+### [```Help```](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/Help.bat) >>> Lancement instantané du projet

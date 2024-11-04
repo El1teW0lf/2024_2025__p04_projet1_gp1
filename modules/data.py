@@ -47,7 +47,7 @@ class DATA:
 /_____/\____/\____/_/ |_/  |___/_____/_/ |_| /_/     """,
             "COLOR_1": "ff99c8",
             "COLOR_2": "e4c1f9",
-            "COLORS": ["ffadad","ffd6a5","fdffb6","caffbf","9bf6ff","a0c4ff","bdb2ff","ffc6ff","fffffc"],
+            "COLORS": ["ff0000","ff8700","deff0a","0aff99","0aefff","147df5","580aff","be0aff"],
             "RANDOM_COLORS": True,
             "COLORED": True,
             "GRAD_STEP": 70,

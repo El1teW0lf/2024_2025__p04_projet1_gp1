@@ -43,7 +43,7 @@ def hex_to_dec(init_number):
           # Writing the hexadecimal number as a sum of numbers multiplied by the highest possible power of 16
         a -= 1  # Reducing the power as we continue the loop
 
-    return target_number
+    return str(target_number)
 
 
 def dec_to_hex(init_number):
@@ -156,7 +156,7 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
     is_negative = False
 
     init_number = str(init_number)
-    for c in range(len(init_number)):
+    for c in range(len(init_number)-1):
         if init_number[c] == "-" and c == 0:
             init_number = init_number.replace("-", "")
             is_negative = True
@@ -175,18 +175,18 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
         LOG(data.get_error("Unknown"),3)
         return False,mess
     
-
+    init_number = str(init_number)
 
 
     # Errors handled, we can start the convertion
     if init_base == target_base:
 
         if is_negative: init_number = "-" + init_number
-        return init_number,None
+        return str(init_number),None
 
     if init_number == "0":
         if is_negative: init_number = "-" + init_number
-        return init_number,None #0 c'est toujours 0 peu importe la base + 0 faisait crash le code en input donc j'ai rajouté cette ligne 
+        return str(init_number),None #0 c'est toujours 0 peu importe la base + 0 faisait crash le code en input donc j'ai rajouté cette ligne 
 
     # Converting the number to decimal if not already done
     if init_base == "bin":
@@ -196,6 +196,7 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
             elif init_number[0] == "1":
                 is_negative = True
                 init_number = complement_of_2(init_number)
+                init_number = bin_to_dec(init_number)
         else:
             init_number = bin_to_dec(init_number)
 
@@ -205,22 +206,28 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
     # If needed, converting the decimal to binary or hexadecimal
     if target_base == "bin":
         
-        if to_signed == True:
-            if int(init_number) > 0:
-                value = dec_to_bin(init_number)
-                value = "0" + value
-            elif is_negative:
-                value = dec_to_bin(init_number)
-                value =  complement_of_2(value)
+        value = dec_to_bin(init_number)
 
+        if to_signed == True:
+            
+            if not is_negative:
+                
+                value = "0" + value
+            else:
+                
+                value = "0" + value
+                value =  complement_of_2(value)
+                is_negative = False
+                
 
         if is_negative: value = "-" + value
         
-        return value,None
+        return str(value),None
     elif target_base == "hex":
         value = dec_to_hex(init_number)
         if is_negative: value = "-" + value
-        return value,None
+        return str(value),None
+    
     if is_negative: init_number = "-" + init_number
     return str(init_number),None
 

@@ -18,9 +18,29 @@ logo = data.ui["LOGO"]
 color_1 = data.ui["COLOR_1"]
 color_2 = data.ui["COLOR_2"]
 
-if data.ui["RANDOM_COLORS"]:
-    color_1 = random.choice(data.ui["COLORS"])
-    color_2 = random.choice(data.ui["COLORS"])
+
+
+def randomise_colors():
+
+    global color_1
+    global color_2
+
+    if data.ui["RANDOM_COLORS"]:
+
+        index_1 = random.randint(0,len(data.ui["COLORS"])-2)
+        index_2 = index_1 + 1
+
+        indices = [index_1, index_2]
+        random.shuffle(indices)
+
+        shuffled_index_1 = indices[0]
+        shuffled_index_2 = indices[1]
+
+        color_1 = data.ui["COLORS"][shuffled_index_1]
+        color_2 = data.ui["COLORS"][shuffled_index_2]
+
+
+randomise_colors()
 
 colored = data.ui["COLORED"]
 
@@ -110,7 +130,13 @@ def center_and_gradient(text: str):
     else:
         return center_text_width_from_other(text, text)
 
+def move_cursor(x, y):
+    # ANSI escape sequence for cursor movement
+    print(f"\033[{y};{x}H", end='')
 
+# Function to hide/show the cursor
+def hide_cursor(hide=True):
+    print("\033[?25l" if hide else "\033[?25h", end='')
 
 
 
@@ -194,13 +220,13 @@ def display_status(text: str, current_status: int, target_status: int) -> str:
 
 # Permet de recupere le texte pour le rendu du menu principal
 def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0, from_signed: str = "", to_signed: str = ""):
-    """Affiche le menu avec les informations saisies et les messages en fonction du statut."""
-    
+    """Affiche le menu avec les informations saisies et les messages en fonction du statut.""" 
+
     menu_text = ""
 
     # Afficher le logo et le titre du projet
     menu_text += center_and_gradient(logo)
-    menu_text += center_and_gradient("Groupe 1; Projet 1")
+    menu_text += center_and_gradient(f"Groupe 1; Projet 1; Status: {status}")
     menu_text += line_skip(2)
 
     # Affichage du nombre source
@@ -211,7 +237,7 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     base_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base de départ: "
     menu_text += display_status(f"{base_prompt} {base}", status, 1)
 
-    if from_signed != "":
+    if base == "1" and status > 1:
         base_prompt = "[0: Non, 1: Oui] Binaire Signé ?: "
         menu_text += display_status(f"{base_prompt} {from_signed}", status, 2)
 
@@ -219,7 +245,7 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     target_prompt = "[1: Binaire, 2: Décimale, 3: Hexadécimal] Base d'arrivée: "
     menu_text += display_status(f"{target_prompt} {target}", status, 3)
 
-    if to_signed != "":
+    if target == "1" and status > 3:
         base_prompt = "[0: Non, 1: Oui] Binaire Signé ?: "
         menu_text += display_status(f"{base_prompt} {to_signed}", status, 4)
 
@@ -244,7 +270,14 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
 
     # Centrer le texte sur la hauteur et afficher
     menu_text = center_text_height(menu_text)
-    print(menu_text)
+
+    count = 0
+    for line in menu_text.splitlines():
+        move_cursor(0,count)
+        print(line)
+        count += 1
+
+    
 
 
 
@@ -264,54 +297,66 @@ def process_key_input(value, key_map):
     return value, False
 
 
-def update_display(number, base, target, status):
-    back_up()
+def update_display(number, base, target, status,from_signed,to_signed):
     get_menu_text(number=number, base=base, target=target, status=status)
 
 
-def input_loop(value, key_map, number, base, target, status):
+def input_loop(value, key_map, number, base, target, status,from_signed,to_signed):
     while True:
 
         if status == 0:
-            update_display(value, base, target, status)  
+            update_display(value, base, target, status,from_signed,to_signed)  
         elif status == 1:
-            update_display(number, value, target, status)  
+            update_display(number, value, target, status,from_signed,to_signed)  
+        
+        elif status == 2:
+            update_display(number,base,target,status,value,to_signed)
         elif status == 3:
-            update_display(number, base, value, status) 
+            update_display(number, base, value, status,from_signed,to_signed) 
+        elif status == 4:
+            update_display(number,base,target,status,from_signed,value)
 
         value, done = process_key_input(value, key_map)
-
+        
         if done:
+            LOG(f"base: {base} from_signed: {from_signed} value: {value} status :{status}",0)
             return value
 
-def get_input_live(number="", base="", target=""):    
+def get_input_live(number="", base="", target="", from_signed = "", to_signed = ""):    
     clear()
 
     if number == "":
-        number = input_loop(number, data.ui["COMPLETE_CHAT_MAP"], number, base, target, 0)
+        number = input_loop(number, data.ui["COMPLETE_CHAT_MAP"], number, base, target, 0,from_signed,to_signed)
     
     if base == "":
-        base = input_loop(base, data.ui["INT_CHAR_MAP"], number, base, target, 1)
+        base = input_loop(base, data.ui["INT_CHAR_MAP"], number, base, target, 1,from_signed,to_signed)
+
+    if base == "1" and from_signed == "":
+        from_signed = input_loop(base, data.ui["BOOL_CHAR_MAP"], number, base, target, 2,from_signed,to_signed)
 
     if target == "":
-        target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target,3)
+        target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target,3,from_signed,to_signed)
 
-    return number, base, target
+    if target == "1" and to_signed == "":
+        to_signed = input_loop(base, data.ui["BOOL_CHAR_MAP"], number, base, target, 4,from_signed,to_signed)
+
+    return number, base, target,from_signed,to_signed
 
 
 
 
-def main(error=None, result=None, number=None, base=None, target=None):
+def main(error=None, result=None, number=None, base=None, target=None,from_signed = None,to_signed = None):
 
     clear()
+    hide_cursor(True)
 
     if error:
         display_error(error)
         return
 
     if result is None:
-        number, base, target = collect_inputs()
-        return number, base, target
+        number, base, target,from_signed,to_signed = collect_inputs()
+        return number, base, target,from_signed,to_signed
 
 
     display_result(number, base, target, result)
@@ -325,16 +370,16 @@ def display_error(error):
 
 
 def collect_inputs():
-    number = base = target = ""
+    number = base = target = from_signed = to_signed = ""
     LOG("Started input fetching.", 0)
     count = 0
 
     while not (number and base and target):
-        number, base, target = get_input_live(number=number, target=target, base=base)
-        LOG(f"Got input number:{number}, target:{target}, base:{base} from iteration: {count}", 0)
+        number, base, target, from_signed, to_signed = get_input_live(number=number, target=target, base=base, from_signed=from_signed, to_signed=to_signed)
+        LOG(f"Got input number:{number}, target:{target}, base:{base}, {from_signed}, {to_signed} from iteration: {count}", 0)
         count += 1
 
-    return number, base, target
+    return number, base, target, from_signed, to_signed
 
 
 def display_result(number, base, target, result):

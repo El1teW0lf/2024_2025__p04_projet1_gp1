@@ -1,7 +1,7 @@
 import time
 from modules.data import DATA
 
-lvl = 1
+lvl = 0
 PREFIX = DATA().log["PREFIX"]
 
 logfile = "logs.txt"
@@ -17,8 +17,8 @@ def LOG(data: str, level: int):
 
     try:
         with open(logfile, "a") as file:
-          #  file.write(log_msg +"\n")
-          pass
+            pass
+          
     except IOError as e:
         print(f"Error writing to log file: {e}")
 

@@ -4,23 +4,21 @@ import modules.tests as tests
 import modules.converter as converter
 import modules.data as Data
 from modules.logger import LOG
-import sys
-from getpass import getpass
-import subprocess
-import pkg_resources
 import modules.keyboard as keyboard
+import os
 
-#Verifie si le modules "pynput", nécessaire est disponible
+def close_terminal():
+    if sys.platform == "win32":  # Windows
+        os.system("exit")
+    elif sys.platform == "linux" or sys.platform == "darwin":  # Linux/Mac
+        os.system("exit")
+    else:
+        print("Unsupported OS")
 
-required = {'keyboard'}
-installed = {pkg.key for pkg in pkg_resources.working_set}
-missing = required - installed
+    os._exit(0)  
+
 
 data = Data.DATA()
-
-
-
-
 
 #Detect le type de launch, si c'est ui, cmd simple ou module import
 def detect_launch_type():
@@ -95,5 +93,4 @@ if __name__ == "__main__":
                 if key == 'enter':
                     break
                 elif key == 'esc':
-                    raise Exception("Exited.")
-
+                    close_terminal()

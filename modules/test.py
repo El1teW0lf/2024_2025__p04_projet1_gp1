@@ -1,60 +1,65 @@
-import random
 import time
 import sys
 import os
 
-# List of emojis (Unicode)
-emojis = ["😀", "😎", "😂", "😜", "😍", "🤖", "👽", "🐱", "🐶", "🍕", "🎉", "🚀", "⚽"]
+texts = ["Hello, World!"]
 
-# Function to generate a random ANSI color code
-def random_color():
-    return f"\033[38;5;{random.randint(0, 255)}m"
-
-# Function to move the cursor to a specific position
 def move_cursor(x, y):
-    # ANSI escape sequence for cursor movement
     print(f"\033[{y};{x}H", end='')
 
-# Function to hide/show the cursor
 def hide_cursor(hide=True):
     print("\033[?25l" if hide else "\033[?25h", end='')
 
-# Function to reset ANSI colors and cursor visibility
 def reset_terminal():
-    print("\033[0m", end='')  # Reset color
-    hide_cursor(False)  # Show cursor again
+    hide_cursor(False)
 
-# Function to print emojis at random positions
-def print_emojis():
+def clear_line(y):
+    move_cursor(0, y)  # Move to the start of the line
+    print("\033[K", end='')  # ANSI escape code to clear the line
+
+# Main loop to print moving text back and forth
+def display_moving_text():
     # Get the terminal size
-    rows, cols = os.get_terminal_size()
+    cols, rows = os.get_terminal_size()
 
-    for _ in range(200):  # Number of emojis to print
-        # Choose random coordinates within terminal size
-        x = random.randint(1, cols )  # Leave some margin
-        y = random.randint(1, rows )
-        
-        # Choose a random emoji and color
-        emoji = random.choice(emojis)
-        color = random_color()
+    text_index = 0  # Track which text from the list to display
 
-        # Move cursor and print emoji at the random position
-        move_cursor(x, y)
-        print(f"{color}{emoji}", end='')
+    try:
+        # Hide the cursor
+        hide_cursor(True)
 
-# Main loop
-try:
-    # Hide the cursor
-    hide_cursor(True)
+        x_position = 0  # Start from the left-most position
+        direction = 1  # 1 for moving right, -1 for moving left
+        text = texts[text_index]  # Get the current text
+        y = rows // 2  # Center vertically
 
-    while True:
-        # Print random emojis at random locations
-        print_emojis()
+        while True:
+            # Clear the current line before moving
+            clear_line(y)
 
-        # Wait for 1/20th of a second to maintain 20 FPS
-        time.sleep(1/20)
+            # Move cursor to the current position and print the text
+            move_cursor(x_position, y)
+            print(f"{text}", end='', flush=True)
 
-except KeyboardInterrupt:
-    # Reset terminal settings on exit
-    reset_terminal()
-    sys.exit(0)
+            # Update the horizontal position for the next frame
+            x_position += direction
+
+            # If the text reaches the right edge, change direction to left
+            if x_position + len(text) >= cols:
+                direction = -1  # Start moving left
+
+            # If the text reaches the left edge, change direction to right
+            if x_position <= 0:
+                direction = 1  # Start moving right
+
+            # Control the speed of the movement
+            time.sleep(0.05)
+
+    except KeyboardInterrupt:
+        # Reset terminal settings on exit
+        reset_terminal()
+        sys.exit(0)
+
+# Run the main display loop
+if __name__ == "__main__":
+    display_moving_text()

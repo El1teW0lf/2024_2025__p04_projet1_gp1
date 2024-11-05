@@ -9,7 +9,8 @@ class DATA:
             "NON_NUMERIC_CHARACTER": "Cela contient des caractères non numériques",
             "INVALID_SIGN": "Le nombre doit être >= 0",
             "MISSING_PACKAGES": "Vous avez besoin du paquet 'keyboard' pour exécuter ce projet. Veuillez exécuter 'pip install .'",
-            "MALFORMED_NUMBER": "Le nombre est malformé."
+            "MALFORMED_NUMBER": "Le nombre est malformé.",
+            "INVALID_BIN_TYPE": "La reponse pour si le binaire d'entré/de sortie est signé est malformée."
         }
 
 

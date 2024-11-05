@@ -238,6 +238,7 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     menu_text += display_status(f"{base_prompt} {base}", status, 1)
 
     if base == "1" and status > 1:
+    
         base_prompt = "[0: Non, 1: Oui] Binaire Signé ?: "
         menu_text += display_status(f"{base_prompt} {from_signed}", status, 2)
 
@@ -298,12 +299,14 @@ def process_key_input(value, key_map):
 
 
 def update_display(number, base, target, status,from_signed,to_signed):
-    get_menu_text(number=number, base=base, target=target, status=status)
+    get_menu_text(number=number, base=base, target=target, status=status, from_signed=from_signed, to_signed=to_signed)
 
 
 def input_loop(value, key_map, number, base, target, status,from_signed,to_signed):
-    while True:
 
+
+    while True:
+    
         if status == 0:
             update_display(value, base, target, status,from_signed,to_signed)  
         elif status == 1:
@@ -319,7 +322,6 @@ def input_loop(value, key_map, number, base, target, status,from_signed,to_signe
         value, done = process_key_input(value, key_map)
         
         if done:
-            LOG(f"base: {base} from_signed: {from_signed} value: {value} status :{status}",0)
             return value
 
 def get_input_live(number="", base="", target="", from_signed = "", to_signed = ""):    
@@ -332,13 +334,13 @@ def get_input_live(number="", base="", target="", from_signed = "", to_signed = 
         base = input_loop(base, data.ui["INT_CHAR_MAP"], number, base, target, 1,from_signed,to_signed)
 
     if base == "1" and from_signed == "":
-        from_signed = input_loop(base, data.ui["BOOL_CHAR_MAP"], number, base, target, 2,from_signed,to_signed)
+        from_signed = input_loop(from_signed, data.ui["BOOL_CHAR_MAP"], number, base, target, 2,from_signed,to_signed)
 
     if target == "":
         target = input_loop(target, data.ui["INT_CHAR_MAP"], number, base, target,3,from_signed,to_signed)
 
     if target == "1" and to_signed == "":
-        to_signed = input_loop(base, data.ui["BOOL_CHAR_MAP"], number, base, target, 4,from_signed,to_signed)
+        to_signed = input_loop(to_signed, data.ui["BOOL_CHAR_MAP"], number, base, target, 4,from_signed,to_signed)
 
     return number, base, target,from_signed,to_signed
 
@@ -376,7 +378,6 @@ def collect_inputs():
 
     while not (number and base and target):
         number, base, target, from_signed, to_signed = get_input_live(number=number, target=target, base=base, from_signed=from_signed, to_signed=to_signed)
-        LOG(f"Got input number:{number}, target:{target}, base:{base}, {from_signed}, {to_signed} from iteration: {count}", 0)
         count += 1
 
     return number, base, target, from_signed, to_signed

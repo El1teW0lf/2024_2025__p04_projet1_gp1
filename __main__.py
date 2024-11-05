@@ -48,9 +48,25 @@ def run():
     launch = detect_launch_type()
     LOG(f"Got launch type: {launch}",0)
     if launch == 0:
-        number, base, target = ui.main()
+        number, base, target,from_signed,to_signed = ui.main()
         result = ""
         mess = ""
+
+        to_signed_bool = from_signed_bool = False
+
+        if from_signed != "" and from_signed != "0" and from_signed != "1":
+            LOG(data.get_error("INVALID_BIN_TYPE"), 3)
+            mess = "INVALID_BIN_TYPE"
+        else:
+            from_signed_bool = False if from_signed == "" or from_signed == "0" else True if from_signed == "1" else False
+
+        if to_signed != "" and to_signed != "0" and to_signed != "1":
+            LOG(data.get_error("INVALID_BIN_TYPE"), 3)
+            mess = "INVALID_BIN_TYPE"
+
+        else:
+            to_signed_bool = False if to_signed == "" or to_signed == "0" else True if to_signed == "1" else False
+
 
         if type(base) != int:
             LOG(data.get_error("INVALID_START_BASE"), 3)
@@ -73,7 +89,7 @@ def run():
         # Cette partie là c'est Blackbox AI parce que moi ça marchait pas et lui ça marchait
         else:
             try:
-                result, mess = converter.converter(number, data.convert["BASES"][base-1], data.convert["BASES"][target-1])
+                result, mess = converter.converter(number, data.convert["BASES"][base-1], data.convert["BASES"][target-1], from_signed=from_signed_bool, to_signed=to_signed_bool)
             except Exception as e:
                 mess = str(e)
         print(result, mess)

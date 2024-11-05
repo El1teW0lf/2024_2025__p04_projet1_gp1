@@ -1,10 +1,12 @@
 import time
 from modules.data import DATA
+import os
 
+parent_directory = os.path.dirname(os.path.abspath(__file__))
 lvl = 0
 PREFIX = DATA().log["PREFIX"]
 
-logfile = "logs.txt"
+logfile = os.path.join(parent_directory,"logs.txt")
 
 def LOG(data: str, level: int):
     current_time = time.localtime()  
@@ -17,9 +19,9 @@ def LOG(data: str, level: int):
 
     try:
         with open(logfile, "a") as file:
-            pass
+            file.write(log_msg+"\n")
           
-    except IOError as e:
+    except Exception as e:
         print(f"Error writing to log file: {e}")
 
 

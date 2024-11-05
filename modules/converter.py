@@ -181,8 +181,37 @@ def converter(init_number, init_base, target_base, from_signed = None, to_signed
     # Errors handled, we can start the convertion
     if init_base == target_base:
 
-        if is_negative: init_number = "-" + init_number
-        return str(init_number),None
+        if init_base == target_base == "bin" and from_signed != to_signed:
+
+            if from_signed == True:
+                if init_number[0] == "0":
+                    init_number = bin_to_dec(init_number)
+                elif init_number[0] == "1":
+                    is_negative = True
+                    init_number = complement_of_2(init_number)
+                    init_number = bin_to_dec(init_number)
+            else:
+                init_number = bin_to_dec(init_number)
+
+            value = dec_to_bin(init_number)
+
+            if to_signed == True:
+                LOG(f"{is_negative} {value}",0)
+                if not is_negative:
+                    
+                    value = "0" + value
+                else:
+                    
+                    value = "0" + value
+                    value =  complement_of_2(value)
+                    is_negative = False
+            LOG(f"{is_negative} {value}",0)
+
+            if is_negative: value = "-" + value
+            return str(value),None
+        else:
+            if is_negative: init_number = "-" + init_number
+            return str(init_number),None
 
     if init_number == "0":
         if is_negative: init_number = "-" + init_number

@@ -89,7 +89,7 @@ def test_converter():
     assert_conversion("a", HEXADECIMAL, DECIMAL, "10", error_counter)
 
     # Decimal to other bases
-    assert_conversion("10", DECIMAL, BINARY, "1010", error_counter)
+    assert_conversion("-10", DECIMAL, BINARY, "-1010", error_counter)
     assert_conversion("10", DECIMAL, HEXADECIMAL, "a", error_counter)
 
     # Edge case: conversions of zero

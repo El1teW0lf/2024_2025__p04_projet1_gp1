@@ -3,12 +3,10 @@ import math
 from getpass import getpass
 from modules.logger import LOG
 from modules.data import DATA
-import time
 import random
 import modules.keyboard as keyboard
-import sys
-
-
+import threading
+import time
 
 data = DATA()
 
@@ -18,7 +16,19 @@ logo = data.ui["LOGO"]
 color_1 = data.ui["COLOR_1"]
 color_2 = data.ui["COLOR_2"]
 
+menu_data = ""
+fps = 10
+lock = threading.Lock()
 
+global_offset = 0
+is_animated = data.ui["ANIMATED"]
+
+global_data = []
+
+is_rainbow = data.ui["RAINBOW"]
+rainbow_size = data.ui["RAINBOW_DISTANCE"]
+
+gradient_step = data.ui["GRAD_STEP"]
 
 def randomise_colors():
 
@@ -121,12 +131,22 @@ def center_text_height(text: str):
 # Permet de colorer le text et de le centrer sans que les characters ANSI fasse n'importe quoi en gros
 def center_and_gradient(text: str):
     if colored:
-        return center_text_width_from_other(
-            apply_color_gradient(
-                text, generate_gradient(color1=color_1, color2=color_2, steps=data.ui["GRAD_STEP"])
-            ),
-            text,
-        )
+
+        if is_rainbow:
+
+            return center_text_width_from_other(
+                apply_color_gradient(
+                    text, generate_rainbow_gradient(steps=data.ui["GRAD_STEP"], offset=global_offset, distance=rainbow_size)
+                ),
+                text,
+            )
+        else:
+            return center_text_width_from_other(
+                apply_color_gradient(
+                    text, generate_gradient(color1=color_1, color2=color_2, steps=data.ui["GRAD_STEP"], offset=global_offset)
+                ),
+                text,
+            )
     else:
         return center_text_width_from_other(text, text)
 
@@ -140,6 +160,35 @@ def hide_cursor(hide=True):
 
 
 
+def hsv_to_rgb(h, s, v):
+    h = h % 360  # Ensure hue is within 0-360 degrees
+    c = v * s  # Chroma
+    x = c * (1 - abs((h / 60) % 2 - 1))
+    m = v - c
+
+    if 0 <= h < 60:
+        r, g, b = c, x, 0
+    elif 60 <= h < 120:
+        r, g, b = x, c, 0
+    elif 120 <= h < 180:
+        r, g, b = 0, c, x
+    elif 180 <= h < 240:
+        r, g, b = 0, x, c
+    elif 240 <= h < 300:
+        r, g, b = x, 0, c
+    else:  # 300 <= h < 360
+        r, g, b = c, 0, x
+
+    # Convert r, g, b to the range 0-255
+    r = round((r + m) * 255)
+    g = round((g + m) * 255)
+    b = round((b + m) * 255)
+
+    return (r, g, b)
+
+def rgb_to_hex(rgb):
+    """Convert RGB color to hex color."""
+    return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
 
 # Je veux dire j'ai meme besoin d'expliquer cette fonction ?
 def hex_to_rgb(hex_color: str):
@@ -163,24 +212,39 @@ def get_colored_char(char: str, hex_color: str):
 
 
 # Permet de generer un degrade de couleur pour faire jolie sur le logo
-def generate_gradient(color1: str, color2: str, steps: int):
+def generate_gradient(color1: str, color2: str, steps: int, offset: int = 0):
     color1_rgb = hex_to_rgb(color1)
     color2_rgb = hex_to_rgb(color2)
 
     gradient = []
 
-    for step in range(
-        steps
-    ):  # Pour faire simple cette boucle fait la moyenne entre deux couleurs pour en deduire un degrade genre 0 - 10 puis 0 - 5 - 10 puis 0 - 2.5 - 5 - 7.5 - 10
+    for step in range(steps):
+        adjusted_step = (step + offset) % steps
         interpolated_color = (
-            int(color1_rgb[0] + (color2_rgb[0] - color1_rgb[0]) * step / (steps - 1)),
-            int(color1_rgb[1] + (color2_rgb[1] - color1_rgb[1]) * step / (steps - 1)),
-            int(color1_rgb[2] + (color2_rgb[2] - color1_rgb[2]) * step / (steps - 1)),
+            int(color1_rgb[0] + (color2_rgb[0] - color1_rgb[0]) * adjusted_step / (steps - 1)),
+            int(color1_rgb[1] + (color2_rgb[1] - color1_rgb[1]) * adjusted_step / (steps - 1)),
+            int(color1_rgb[2] + (color2_rgb[2] - color1_rgb[2]) * adjusted_step / (steps - 1)),
         )
         gradient.append(rgb_to_hex(interpolated_color))
 
     return gradient
 
+def generate_rainbow_gradient(steps: int, distance: int, offset: int = 0):
+
+    gradient = []
+    
+    # Calculate hue increment based on the total distance and steps
+    hue_increment = distance / steps
+    
+    for step in range(steps):
+        # Calculate the current hue with offset
+        hue = (offset + step * hue_increment) % 360
+        # Convert the hue to RGB (assuming full saturation and value for a vibrant rainbow)
+        rgb_color = hsv_to_rgb(hue, 1, 1)
+        # Append the hex color to the gradient
+        gradient.append(rgb_to_hex(rgb_color))
+    
+    return gradient
 
 # Permet de diviser une string en une list de n mini string de meme longeur (plus ou moins)
 def divide_string(s: str, n: int):
@@ -219,6 +283,19 @@ def display_status(text: str, current_status: int, target_status: int) -> str:
     return center_and_gradient(f"=> {text}" if current_status == target_status else text)
 
 # Permet de recupere le texte pour le rendu du menu principal
+
+
+def print_menu(menu):
+    # afficher ligne par ligne pour eviter le glitch du terminal qui panick
+    # a la place de re print un gros block de la taille du terminal pour rafrachir l'ecran, on remplace ligne par ligne, ca marche mieux
+    count = 0
+    for line in menu.splitlines():
+        move_cursor(0,count)
+        print(line)
+        count += 1
+    move_cursor(0,count)
+    print("")
+
 def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0, from_signed: str = "", to_signed: str = ""):
     """Affiche le menu avec les informations saisies et les messages en fonction du statut.""" 
 
@@ -272,12 +349,8 @@ def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str 
     # Centrer le texte sur la hauteur et afficher
     menu_text = center_text_height(menu_text)
 
-    count = 0
-    for line in menu_text.splitlines():
-        move_cursor(0,count)
-        print(line)
-        count += 1
 
+    return menu_text
     
 
 
@@ -299,9 +372,27 @@ def process_key_input(value, key_map):
 
 
 def update_display(number, base, target, status,from_signed,to_signed):
-    get_menu_text(number=number, base=base, target=target, status=status, from_signed=from_signed, to_signed=to_signed)
+    global global_data
+    global_data = [number,base, target, None,None,status,from_signed, to_signed]
 
 
+def print_loop():
+    while True:
+        start_time = time.time()
+
+        with lock:
+            global global_offset
+            if is_animated:
+                global_offset += gradient_step
+            data = global_data
+
+        menu_data = get_menu_text(*data)    
+        print_menu(menu_data)
+
+        time.sleep(1 / fps)
+
+        real_fps = 1 / (time.time() - start_time)
+        
 def input_loop(value, key_map, number, base, target, status,from_signed,to_signed):
 
 
@@ -325,7 +416,7 @@ def input_loop(value, key_map, number, base, target, status,from_signed,to_signe
             return value
 
 def get_input_live(number="", base="", target="", from_signed = "", to_signed = ""):    
-    clear()
+    #clear()
 
     if number == "":
         number = input_loop(number, data.ui["COMPLETE_CHAT_MAP"], number, base, target, 0,from_signed,to_signed)
@@ -365,10 +456,12 @@ def main(error=None, result=None, number=None, base=None, target=None,from_signe
 
 
 def display_error(error):
+    global global_data
     if error in data.errors:
-        get_menu_text(error=data.errors[error], status=6)
+        global_data = [None,None, None, None,data.errors[error],6,None, None]
     else:
-        get_menu_text(error=f"Erreur Python: {error}", status=6)
+        global_data = [None,None, None, None,f"Erreur Python: {error}",6,None, None]
+
 
 
 def collect_inputs():
@@ -385,7 +478,9 @@ def collect_inputs():
 
 def display_result(number, base, target, result):
     back_up()
-    get_menu_text(number=number, base=base, target=target, result=result, status=5)
+    global global_data
+    global_data = [number,base, target, result,None,5,None, None]
+
 
 
 
@@ -394,3 +489,8 @@ def get_input(prompt, convert_to=str):
 
     user_input = getpass(prompt)
     return convert_to(user_input)
+
+def setup_loop():
+    loop_thread = threading.Thread(target=print_loop)
+    loop_thread.daemon = True 
+    loop_thread.start()

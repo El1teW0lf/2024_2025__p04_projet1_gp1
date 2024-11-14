@@ -5,6 +5,7 @@ import modules.converter as converter
 import modules.data as Data
 from modules.logger import LOG
 import modules.keyboard as keyboard
+import modules.ui as ui
 import os
 
 def close_terminal():
@@ -20,19 +21,20 @@ def close_terminal():
 
 data = Data.DATA()
 
+ui_loop_set = False
+
 #Detect le type de launch, si c'est ui, cmd simple ou module import
 def detect_launch_type():
     args = sys.argv
 
-    launch_type = 0 #Type de Lancement. 0 = UI,2 = cmd avec la base de depart., 3 = Tests
-
-    if len(args) == 3:
-        launch_type = 1
-    elif len(args)>3:
-        launch_type = 2
+    launch_type = 0 
 
     if len(args) > 1:
         if args[1] == "run_test":
+            launch_type = 3
+        if args[1] == "help":
+            launch_type = 3
+        if args[1] == "set":
             launch_type = 3
 
     return launch_type
@@ -41,13 +43,17 @@ def run():
    
     LOG("Started BCONVERT",0)
 
-    #assert len(missing) == 0, data.errors["MISSING_PACKAGES"]
-
-    import modules.ui as ui
+    #assert len(missing) == 0, data.errors["MISSING_PACKAGES"
     
     launch = detect_launch_type()
     LOG(f"Got launch type: {launch}",0)
     if launch == 0:
+
+        global ui_loop_set
+        if not ui_loop_set:
+            ui.setup_loop()
+            ui_loop_set = True
+
         number, base, target,from_signed,to_signed = ui.main()
         result = ""
         mess = ""
@@ -96,6 +102,7 @@ def run():
         ui.main(result=result, error=mess, number=number, base=base, target=target)
 
     elif launch == 3:
+        print(data.ui["LOGO"])
         tests.run_tests()
 
 if __name__ == "__main__":

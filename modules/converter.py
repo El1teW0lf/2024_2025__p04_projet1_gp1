@@ -9,22 +9,6 @@ data = DATA()
 hex_map = data.convert["HEXA_MAP"]
 bases = data.convert["BASES"]
 
-
-def is_natural(c):
-    is_int = False
-    try:  # if the convertion of the character to an integer isn't working, then it's not a number
-        value = int(c)
-        is_int = True
-        if int(c) >= 0:   # if the number is negative, it's not a natural number
-
-            is_int  = True 
-
-    except:
-        pass
-
-    return is_int
-
-
 def hex_to_dec(init_number):
     v1 = []
     for i in init_number:

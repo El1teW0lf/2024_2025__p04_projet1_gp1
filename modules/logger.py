@@ -3,7 +3,7 @@ from modules.data import DATA
 import os
 
 parent_directory = os.path.dirname(os.path.abspath(__file__))
-lvl = 0
+lvl = 1
 PREFIX = DATA().log["PREFIX"]
 
 logfile = os.path.join(parent_directory,"logs.txt")

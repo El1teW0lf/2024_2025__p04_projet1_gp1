@@ -28,7 +28,7 @@ global_data = []
 is_rainbow = data.ui["RAINBOW"]
 rainbow_size = data.ui["RAINBOW_DISTANCE"]
 
-gradient_step = data.ui["GRAD_STEP"]
+gradient_step = data.ui["GRAD_SPEED"]
 
 def randomise_colors():
 
@@ -293,8 +293,6 @@ def print_menu(menu):
         move_cursor(0,count)
         print(line)
         count += 1
-    move_cursor(0,count)
-    print("")
 
 def get_menu_text(number: str = "", base: str = 0, target: str = 0, result: str = "", error: str = "", status: int = 0, from_signed: str = "", to_signed: str = ""):
     """Affiche le menu avec les informations saisies et les messages en fonction du statut.""" 

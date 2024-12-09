@@ -1,17 +1,17 @@
-__main__.py
-README.md
-SECURITY.md
-fonctionnement.md
-menus/settings.py
-menus/code.py
-menus/pause.py
-scenes/test.py
-scenes/start_menu.py
-controller/player.py
-controller/free_cam.py
-controller/free_cam_collide.py
-safe_run/parent.py
-safe_run/child.py
-modules/parse_data.py
-modules/blender_export_script.py
-syntax/parse.py
+* __main__.py
+* README.md
+* SECURITY.md
+* fonctionnement.md
+* menus/settings.py
+* menus/code.py
+* menus/pause.py
+* scenes/test.py
+* scenes/start_menu.py
+* controller/player.py
+* controller/free_cam.py
+* controller/free_cam_collide.py
+* safe_run/parent.py
+* safe_run/child.py
+* modules/parse_data.py
+* modules/blender_export_script.py
+* syntax/parse.py

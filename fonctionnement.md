@@ -10,7 +10,7 @@
 
 •	```menus/code.py``` : Ce fichier est un module Python qui définit le code pour les menus du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées aux menus.
 
-•	```menus/pause.py : Ce fichier est un module Python qui définit le code pour la fonctionnalité de pause du projet. Il peut contenir des fonctions et des classes pour gérer l'état de pause, les événements et les actions associées à la pause.
+•	```menus/pause.py``` : Ce fichier est un module Python qui définit le code pour la fonctionnalité de pause du projet. Il peut contenir des fonctions et des classes pour gérer l'état de pause, les événements et les actions associées à la pause.
 
 •	```scenes/test.py``` : Ce fichier est un module Python qui définit un scénario de test pour le projet. Il peut contenir des fonctions et des classes pour simuler des interactions utilisateur, des événements et des actions pour tester le projet.
 

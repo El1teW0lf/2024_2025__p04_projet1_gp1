@@ -2,19 +2,19 @@
 
 •	```README.md``` : Ce fichier est un fichier de documentation qui décrit le projet, ses objectifs, ses fonctionnalités et ses instructions d'utilisation. Il est écrit en Markdown et est destiné à être lu par les utilisateurs et les développeurs.
 
-•	```SECURITY.md : Ce fichier est un fichier de documentation qui décrit les mesures de sécurité prises pour protéger le projet contre les vulnérabilités et les attaques. Il peut contenir des informations sur les protocoles de sécurité, les mises à jour de sécurité et les meilleures pratiques pour utiliser le projet de manière sécurisée.
+•	```SECURITY.md``` : Ce fichier est un fichier de documentation qui décrit les mesures de sécurité prises pour protéger le projet contre les vulnérabilités et les attaques. Il peut contenir des informations sur les protocoles de sécurité, les mises à jour de sécurité et les meilleures pratiques pour utiliser le projet de manière sécurisée.
 
-•	```fonctionnement.md : Ce fichier est un fichier de documentation qui décrit le fonctionnement interne du projet. Il peut contenir des informations sur l'architecture du projet, les flux de données, les algorithmes utilisés et les dépendances.
+•	```fonctionnement.md``` : Ce fichier est un fichier de documentation qui décrit le fonctionnement interne du projet. Il peut contenir des informations sur l'architecture du projet, les flux de données, les algorithmes utilisés et les dépendances.
 
-•	```menus/settings.py : Ce fichier est un module Python qui définit les paramètres et les options pour les menus du projet. Il peut contenir des variables et des fonctions pour gérer les préférences utilisateur, les paramètres de l'application et les options de configuration.
+•	```menus/settings.py``` : Ce fichier est un module Python qui définit les paramètres et les options pour les menus du projet. Il peut contenir des variables et des fonctions pour gérer les préférences utilisateur, les paramètres de l'application et les options de configuration.
 
-•	```menus/code.py : Ce fichier est un module Python qui définit le code pour les menus du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées aux menus.
+•	```menus/code.py``` : Ce fichier est un module Python qui définit le code pour les menus du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées aux menus.
 
 •	```menus/pause.py : Ce fichier est un module Python qui définit le code pour la fonctionnalité de pause du projet. Il peut contenir des fonctions et des classes pour gérer l'état de pause, les événements et les actions associées à la pause.
 
-•	```scenes/test.py : Ce fichier est un module Python qui définit un scénario de test pour le projet. Il peut contenir des fonctions et des classes pour simuler des interactions utilisateur, des événements et des actions pour tester le projet.
+•	```scenes/test.py``` : Ce fichier est un module Python qui définit un scénario de test pour le projet. Il peut contenir des fonctions et des classes pour simuler des interactions utilisateur, des événements et des actions pour tester le projet.
 
-•	```scenes/start_menu.py : Ce fichier est un module Python qui définit le code pour le menu de démarrage du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées au menu de démarrage.
+•	```scenes/start_menu.py``` : Ce fichier est un module Python qui définit le code pour le menu de démarrage du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées au menu de démarrage.
 
 •	```controller/player.py ```: Ce fichier est un module Python qui définit le code pour le contrôleur de joueur du projet. Il peut contenir des fonctions et des classes pour gérer les interactions utilisateur, les événements et les actions associées au joueur.
 

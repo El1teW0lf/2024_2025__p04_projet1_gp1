@@ -8,7 +8,7 @@
 </h1>
 
 # 👨‍💼 • Membres :
-### Classe de 1ere 4, Cours de Mr Pioche
+### Classe de 1ere 4, Cours de Mr Jim Pioche
 * #### Célestin → [GoldyRat](https://github.com/GoldyRat)
 * #### Mateo → [El1teW0lf](https://github.com/El1teW0lf)
 * #### Victor → [Herasium](https://github.com/Herasium)
@@ -40,3 +40,4 @@
 
 ### [```Help```](https://github.com/El1teW0lf/2024_2025__p04_projet1_gp1/blob/main/Help.bat) >>> Lancement instantané du projet
 ### [```Présentation```](https://www.figma.com/design/v1FIIwnjwjVg9ZifyZI5Ib/BCONVERT?node-id=0-1&t=CgidLjBrqHW4Hjqg-1`) >>> Explication simplifié du projet
+
